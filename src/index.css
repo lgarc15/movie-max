@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -11,3 +12,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.my-bg-primary {
+  background-color: rgb(28, 34, 49) !important;
+}
+
+.my-bg-secondary {
+  background-color: rgb(14, 19, 30) !important;
+}
+
+.my-bg-tertiary {
+  background-color: rgb(236, 70, 85) !important;
+}
+
+.my-cl-primary {
+  color: rgb(28, 34, 49) !important;
+}
+
+.my-cl-secondary {
+  color: rgb(14, 19, 30) !important;
+}
+
+.my-cl-tertiary {
+    color: rgb(236, 70, 85) !important;
+}
+

@@ -1,0 +1,18 @@
+#top-navbar {
+    position: fixed;
+
+    height: 90px;
+    width: 100%;
+}
+
+#top-navbar-brand {
+    font-size: 2em;
+}
+
+#top-navbar-content {
+    
+}
+
+#top-navbar-search-btn {
+    border: none;
+}
