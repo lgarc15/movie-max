@@ -11,6 +11,7 @@
 }
 
 #sidebar {
+    position: fixed;
     padding: 60px 0 0 0;
     min-height: 100%;
 
@@ -34,6 +35,7 @@
     padding: 90px 0 0 0;
     color: white;
     /* height: 180px; */
+    overflow: scroll;
 }
 
 #content {
@@ -45,4 +47,33 @@
     border: 1px solid green;
     height: 80vh;
     width: 100%;
+}
+
+.movie-section {
+    margin: 48px 0;
+}
+
+#now-playing {
+    /* border: 1px solid red; */
+}
+
+.titles {
+    /* height: 200px; */
+    border: 1px solid red;
+    padding: 0 !important;
+    overflow: scroll;
+    white-space: nowrap;
+}
+
+.title {
+    border: 1px solid blue;
+    height: 200px;
+    width: 130px;
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.movie-poster {
+    height: 200px;
+    width: 130px;
 }
