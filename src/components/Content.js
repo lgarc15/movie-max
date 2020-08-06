@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Carousel, Button } from "react-bootstrap";
 import API from "../api";
 
 import "../App.css";
@@ -53,12 +53,7 @@ export default class Content extends React.Component {
     return (
       <Container className="my-bg-primary" id="main-container" fluid>
         <Row>
-          <Col 
-            md={3}
-            lg={3}
-            xl={2}
-            id="sidebar-container"
-          >
+          <Col md={3} lg={3} xl={2} id="sidebar-container">
             <Container id="sidebar">
               <p className="my-cl-tertiary" id="sidebar-title">
                 Browse
@@ -86,16 +81,30 @@ export default class Content extends React.Component {
             id="content-container"
           >
             <Container id="content" fluid>
-              <Container id="carousel-container" fluid>
-                {popular === null || popular === undefined ? (
-                  "There was an error getting now playing movies."
-                ) : (
-                  <img
-                    className="carousel-item-img"
-                    src={`${this.base_img_path}original${popular.results[0].backdrop_path}`}
-                  ></img>
-                )}
-              </Container>
+              <Carousel>
+                {popular === null || popular === undefined
+                  ? "There was an error getting now playing movies."
+                  : popular.results.map((value, index) => {
+                      if (index < 3) {
+                        return (
+                          <Carousel.Item>
+                            <img 
+                              className="d-block w-100"
+                              src={`${this.base_img_path}original${value.backdrop_path}`}
+                              alt="Fill me in"
+                            />
+                            <Carousel.Caption>
+                              <div className="carousel-meta">
+                                <h1>{value.title}</h1>
+                                <button className="about-movie-btn my-bg-tertiary">About Movie</button>
+                              </div>
+                              {/* <p>This is some text that must be here.</p> */}
+                            </Carousel.Caption>
+                          </Carousel.Item>
+                        );
+                      }
+                    })}
+              </Carousel>
             </Container>
             <Container fluid>
               <Row className="justify-content-md-center movie-section">
