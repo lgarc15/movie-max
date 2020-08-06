@@ -26,17 +26,19 @@ export default class Content extends React.Component {
 
   componentDidMount() {
     Promise.all([
-      API.get("movie/now_playing"),
       API.get("movie/popular"),
-      API.get("movie/top_rated"),
+      API.get("movie/now_playing"),
       API.get("movie/upcoming"),
+      API.get("trending/movie/day"),
+      API.get("movie/top_rated"),
     ])
-      .then(([nowPlaying, popular, topRated, upcoming]) => {
+      .then(([popular, nowPlaying, upcoming, trending, topRated]) => {
         this.setState({
-          nowPlaying: this.getMovieListResponse(nowPlaying),
           popular: this.getMovieListResponse(popular),
-          topRated: this.getMovieListResponse(topRated),
+          nowPlaying: this.getMovieListResponse(nowPlaying),
           upcoming: this.getMovieListResponse(upcoming),
+          trending: this.getMovieListResponse(trending),
+          topRated: this.getMovieListResponse(topRated),
         });
       })
       .catch(function (error) {
@@ -46,15 +48,17 @@ export default class Content extends React.Component {
   }
 
   render() {
-    const { nowPlaying, popular, topRated, upcoming } = this.state;
-    if (nowPlaying !== null) {
-      console.log(nowPlaying.results);
-    }
+    const { popular, nowPlaying, upcoming, trending, topRated } = this.state;
 
     return (
       <Container className="my-bg-primary" id="main-container" fluid>
         <Row>
-          <Col md={3} lg={3} xl={2} id="sidebar-container">
+          <Col 
+            md={3}
+            lg={3}
+            xl={2}
+            id="sidebar-container"
+          >
             <Container id="sidebar">
               <p className="my-cl-tertiary" id="sidebar-title">
                 Browse
@@ -75,16 +79,30 @@ export default class Content extends React.Component {
               </ul>
             </Container>
           </Col>
-          <Col md={9} lg={9} xl={10} id="content-container">
+          <Col
+            md={{ span: 9, offset: 3 }}
+            lg={{ span: 9, offset: 3 }}
+            xl={{ span: 10, offset: 2 }}
+            id="content-container"
+          >
             <Container id="content" fluid>
-              <Container id="carousel-container" fluid></Container>
+              <Container id="carousel-container" fluid>
+                {popular === null || popular === undefined ? (
+                  "There was an error getting now playing movies."
+                ) : (
+                  <img
+                    className="carousel-item-img"
+                    src={`${this.base_img_path}original${popular.results[0].backdrop_path}`}
+                  ></img>
+                )}
+              </Container>
             </Container>
             <Container fluid>
               <Row className="justify-content-md-center movie-section">
                 <Col sm="12" md={10}>
                   <h2>Now Playing</h2>
                   <Container className="titles" id="now-playing">
-                    {nowPlaying === null
+                    {nowPlaying === null || nowPlaying === undefined
                       ? "There was an error getting now playing movies."
                       : nowPlaying.results.map((value, index) => {
                           return (
@@ -104,7 +122,7 @@ export default class Content extends React.Component {
                 <Col sm="12" md={10}>
                   <h2>Upcoming</h2>
                   <Container className="titles" id="upcoming">
-                    {upcoming === null
+                    {upcoming === null || upcoming === undefined
                       ? "There was an error getting now playing movies."
                       : upcoming.results.map((value, index) => {
                           return (
@@ -124,9 +142,9 @@ export default class Content extends React.Component {
                 <Col sm="12" md={10}>
                   <h2>Trending</h2>
                   <Container className="titles" id="trending">
-                    {popular === null
-                      ? "There was an error getting now playing movies."
-                      : popular.results.map((value, index) => {
+                    {trending === null || trending === undefined
+                      ? "There was an error getting trending movies."
+                      : trending.results.map((value, index) => {
                           return (
                             <div className="title" key={index}>
                               <img
@@ -144,7 +162,7 @@ export default class Content extends React.Component {
                 <Col sm="12" md={10}>
                   <h2>Top Rated</h2>
                   <Container className="titles" id="top-rated">
-                    {topRated === null
+                    {topRated === null || topRated === undefined
                       ? "There was an error getting now playing movies."
                       : topRated.results.map((value, index) => {
                           return (

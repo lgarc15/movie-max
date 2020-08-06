@@ -8,7 +8,7 @@ import "../stylesheets/TopNavbar.css"
 export default class TopNavbar extends React.Component {
   render() {
     return (
-      <Navbar bg="dark" expand="lg" id="top-navbar">
+      <Navbar expand="lg" id="top-navbar">
         <Navbar.Brand className="my-cl-tertiary" id="top-navbar-brand">MovieMax</Navbar.Brand>
         <Navbar.Toggle aria-controls="top-navbar-content" />
         <Navbar.Collapse id="top-navbar-content">

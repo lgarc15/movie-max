@@ -4,19 +4,16 @@
 }
 
 #sidebar-container {
-    /* border: 1px solid green; */
-    padding-top: 90px;
-    height: 100vh;
-    /* height: 180px; */
+    position: fixed;
+    top: 90px;
+    padding: 0;
 }
 
 #sidebar {
-    position: fixed;
-    padding: 60px 0 0 0;
-    min-height: 100%;
-
+    min-height: 100vh;
+    padding: 60px 24px;
     font-size: 1.2em;
-
+    background-color: rgb(14, 19, 30);
     /* border: 1px solid blue; */
 }
 
@@ -30,7 +27,7 @@
 }
 
 #content-container {
-    border: 1px solid orange;
+    /* border: 1px solid orange; */
     /* padding-top: 90px; */
     padding: 90px 0 0 0;
     color: white;
@@ -39,13 +36,19 @@
 }
 
 #content {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     padding: 0;
 }
 
 #carousel-container {
-    border: 1px solid green;
+    /* border: 1px solid purple; */
+    padding: 0;
     height: 80vh;
+    width: 100%;
+}
+
+.carousel-item-img {
+    height: 100%;
     width: 100%;
 }
 
