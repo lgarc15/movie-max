@@ -4,9 +4,9 @@
 }
 
 #sidebar-container {
-    position: fixed;
-    top: 90px;
-    padding: 0;
+    /* position: fixed;
+    top: 90px; */
+    /* padding: 0; */
 }
 
 #sidebar {
@@ -69,27 +69,74 @@
     margin: 48px 0;
 }
 
-#now-playing {
+button.slick-prev.slick-arrow::before,
+button.slick-next.slick-arrow::before {
+  font-size: 35px;
+  opacity: .9;
+}
+
+.slick-slide > div {
+    margin-left: 15px;
+    margin-right: 15px;
+    opacity: 0.7;
+    transition: all .3s;
+}
+
+.slick-slide > div:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.slick-slide > div a {
+    outline: none !important;
+    color: white;
+    text-decoration: none;
+}
+
+.title-img-container {
+    position: relative;
+}
+
+.title-rating {
+    position: absolute;
+    top: 20px;
+    left: 0px;
+    padding: 2px 5px;
+    background: rgba(0, 0, 0, .9);
+    color: #ff2a55;
+}
+
+.title-rating i {
+    font-size: .6em;
+}
+  
+.title-img-container img {
+    width: 100%;
+    height: auto;
     /* border: 1px solid red; */
 }
 
-.titles {
-    /* height: 200px; */
-    border: 1px solid red;
-    padding: 0 !important;
-    overflow: scroll;
-    white-space: nowrap;
+.title-name {
+    margin: 5px 0px 0px 0px;
+    color: #afb1c2;
+    font-size: 1em;
+    font-weight: 600;
 }
-
-.title {
-    border: 1px solid blue;
-    height: 200px;
-    width: 130px;
-    display: inline-block;
-    margin: 0 15px;
+  
+.title-category {
+    font-size: .8em;
 }
 
 .movie-poster {
     height: 200px;
     width: 130px;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    #sidebar-container {
+      position: fixed;
+      top: 90px;
+      padding: 0;
+    }
 }
