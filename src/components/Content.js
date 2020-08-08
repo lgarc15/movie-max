@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col, Carousel } from "react-bootstrap";
 import Slider from "react-slick";
 import API from "../api";
+import {Animated} from "react-animated-css";
 
 import "../App.css";
 import "../stylesheets/Content.css";
@@ -17,7 +18,7 @@ export default class Content extends React.Component {
       nowPlaying: null,
       upcoming: null,
       trending: null,
-      topRated: null
+      topRated: null,
     };
   }
 
@@ -162,13 +163,20 @@ export default class Content extends React.Component {
             xl={{ span: 10, offset: 2 }}
             id="content-container"
           >
-            <Container id="content" fluid>
-              <Carousel>
-                {popular !== null &&
+            <Animated
+              animationIn="fadeInRight"
+              animationOut="fadeOut"
+              animationInDuration={500}
+              animationOutDuration={500} 
+              isVisible={true}
+            >
+              <Container id="content" fluid>
+                <Carousel id="carousel">
+                  {popular !== null &&
                     popular.results.map((value, index) => {
                       if (index < 3) {
                         return (
-                          <Carousel.Item key={value.id}>
+                          <Carousel.Item key={value.id} className="carousel-item">
                             <img
                               className="d-block w-100"
                               src={`${this.base_img_path}original${value.backdrop_path}`}
@@ -187,14 +195,14 @@ export default class Content extends React.Component {
                         );
                       }
                     })}
-              </Carousel>
-            </Container>
-            <Container fluid>
-              <Row className="justify-content-md-center movie-section">
-                <Col sm="12" md={10}>
-                  <h2>Now Playing</h2>
-                  <Container className="titles" id="now-playing">
-                    {nowPlaying !== null && (
+                </Carousel>
+              </Container>
+              <Container fluid>
+                <Row className="justify-content-md-center movie-section">
+                  <Col sm="12" md={10}>
+                    <h2>Now Playing</h2>
+                    <Container className="titles" id="now-playing">
+                      {nowPlaying !== null && (
                         <Slider {...settings} className="titles-slider">
                           {nowPlaying.results.map((value, index) => (
                             <a
@@ -222,14 +230,14 @@ export default class Content extends React.Component {
                           ))}
                         </Slider>
                       )}
-                  </Container>
-                </Col>
-              </Row>
-              <Row className="justify-content-md-center movie-section">
-                <Col sm="12" md={10}>
-                  <h2>Upcoming</h2>
-                  <Container className="titles" id="upcoming">
-                    {upcoming !== null && (
+                    </Container>
+                  </Col>
+                </Row>
+                <Row className="justify-content-md-center movie-section">
+                  <Col sm="12" md={10}>
+                    <h2>Upcoming</h2>
+                    <Container className="titles" id="upcoming">
+                      {upcoming !== null && (
                         <Slider {...settings} className="titles-slider">
                           {upcoming.results.map((value, index) => (
                             <a
@@ -257,14 +265,14 @@ export default class Content extends React.Component {
                           ))}
                         </Slider>
                       )}
-                  </Container>
-                </Col>
-              </Row>
-              <Row className="justify-content-md-center movie-section">
-                <Col sm="12" md={10}>
-                  <h2>Trending</h2>
-                  <Container className="titles" id="trending">
-                    {trending !== null && (
+                    </Container>
+                  </Col>
+                </Row>
+                <Row className="justify-content-md-center movie-section">
+                  <Col sm="12" md={10}>
+                    <h2>Trending</h2>
+                    <Container className="titles" id="trending">
+                      {trending !== null && (
                         <Slider {...settings} className="titles-slider">
                           {trending.results.map((value, index) => (
                             <a
@@ -292,14 +300,14 @@ export default class Content extends React.Component {
                           ))}
                         </Slider>
                       )}
-                  </Container>
-                </Col>
-              </Row>
-              <Row className="justify-content-md-center movie-section">
-                <Col sm="12" md={10}>
-                  <h2>Top Rated</h2>
-                  <Container className="titles" id="top-rated">
-                    {topRated !== null && (
+                    </Container>
+                  </Col>
+                </Row>
+                <Row className="justify-content-md-center movie-section">
+                  <Col sm="12" md={10}>
+                    <h2>Top Rated</h2>
+                    <Container className="titles" id="top-rated">
+                      {topRated !== null && (
                         <Slider {...settings} className="titles-slider">
                           {topRated.results.map((value, index) => (
                             <a
@@ -327,10 +335,11 @@ export default class Content extends React.Component {
                           ))}
                         </Slider>
                       )}
-                  </Container>
-                </Col>
-              </Row>
-            </Container>
+                    </Container>
+                  </Col>
+                </Row>
+              </Container>
+            </Animated>
           </Col>
         </Row>
       </Container>

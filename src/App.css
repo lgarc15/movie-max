@@ -1,0 +1,12 @@
+#page-loader-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(10, 13, 21);
+}
+
+#page-loader {
+    height: 4em;
+    width: 4em;
+}
