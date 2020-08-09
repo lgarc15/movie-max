@@ -22,8 +22,13 @@
     font-weight: 700;
 }
 
-#sidebar-links {
+/* #sidebar-links {
+    border: 1px solid red !important;
     color: rgb(255, 255, 255);
+} */
+
+.is-current {
+    border: 1px solid red;
 }
 
 #content-container {
@@ -62,7 +67,8 @@
 }
 
 .movie-section {
-    margin: 48px 0;
+    border: 1px solid red;
+    padding-top: 80px;
 }
 
 button.slick-prev.slick-arrow::before,

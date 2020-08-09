@@ -2,7 +2,8 @@ import React from "react";
 import { Container, Row, Col, Carousel } from "react-bootstrap";
 import Slider from "react-slick";
 import API from "../api";
-import {Animated} from "react-animated-css";
+import { Animated } from "react-animated-css";
+import Scrollspy from "react-scrollspy";
 
 import "../App.css";
 import "../stylesheets/Content.css";
@@ -112,48 +113,32 @@ export default class Content extends React.Component {
               <p className="my-cl-tertiary" id="sidebar-title">
                 Browse
               </p>
-              <ul id="sidebar-links">
+              <Scrollspy
+                items={["now-playing", "upcoming", "trending", "top-rated"]}
+                currentClassName="is-current"
+                offset={-120}
+              >
                 <li>
-                  <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                    }}
-                  >
-                    Now Playing
-                  </a>
+                  <a href="#now-playing">Now Playing</a>
+                </li>
+                <li>
+                  <a href="#upcoming">Upcoming</a>
                 </li>
                 <li>
                   <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                    }}
-                  >
-                    Upcoming
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                    }}
+                    href="#trending"
                   >
                     Trending
                   </a>
                 </li>
                 <li>
                   <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                    }}
+                    href="#top-rated"
                   >
                     Top Rated
                   </a>
                 </li>
-              </ul>
+              </Scrollspy>
             </Container>
           </Col>
           <Col
@@ -167,7 +152,7 @@ export default class Content extends React.Component {
               animationIn="fadeInRight"
               animationOut="fadeOut"
               animationInDuration={500}
-              animationOutDuration={500} 
+              animationOutDuration={500}
               isVisible={true}
             >
               <Container id="content" fluid>
@@ -176,7 +161,10 @@ export default class Content extends React.Component {
                     popular.results.map((value, index) => {
                       if (index < 3) {
                         return (
-                          <Carousel.Item key={value.id} className="carousel-item">
+                          <Carousel.Item
+                            key={value.id}
+                            className="carousel-item"
+                          >
                             <img
                               className="d-block w-100"
                               src={`${this.base_img_path}original${value.backdrop_path}`}
@@ -198,21 +186,17 @@ export default class Content extends React.Component {
                 </Carousel>
               </Container>
               <Container fluid>
-                <Row className="justify-content-md-center movie-section">
+                <Row
+                  className="justify-content-md-center movie-section"
+                  id="now-playing"
+                >
                   <Col sm="12" md={10}>
-                    <h2>Now Playing</h2>
-                    <Container className="titles" id="now-playing">
+                    <Container className="titles">
+                      <h2>Now Playing</h2>
                       {nowPlaying !== null && (
                         <Slider {...settings} className="titles-slider">
                           {nowPlaying.results.map((value, index) => (
-                            <a
-                              key={value.id}
-                              href="#"
-                              onClick={(e) => {
-                                e.preventDefault();
-                              }}
-                              tabIndex="0"
-                            >
+                            <div key={value.id}>
                               <div className="title-img-container">
                                 <div className="title-rating">
                                   <i className="fas fa-star"></i>{" "}
@@ -226,28 +210,24 @@ export default class Content extends React.Component {
                               <p className="title-name text-truncate">
                                 {value.original_title}
                               </p>
-                            </a>
+                            </div>
                           ))}
                         </Slider>
                       )}
                     </Container>
                   </Col>
                 </Row>
-                <Row className="justify-content-md-center movie-section">
+                <Row
+                  className="justify-content-md-center movie-section"
+                  id="upcoming"
+                >
                   <Col sm="12" md={10}>
-                    <h2>Upcoming</h2>
-                    <Container className="titles" id="upcoming">
+                    <Container className="titles">
+                      <h2>Upcoming</h2>
                       {upcoming !== null && (
                         <Slider {...settings} className="titles-slider">
                           {upcoming.results.map((value, index) => (
-                            <a
-                              key={value.id}
-                              href="#"
-                              onClick={(e) => {
-                                e.preventDefault();
-                              }}
-                              tabIndex="0"
-                            >
+                            <div key={value.id}>
                               <div className="title-img-container">
                                 <div className="title-rating">
                                   <i className="fas fa-star"></i>{" "}
@@ -261,28 +241,24 @@ export default class Content extends React.Component {
                               <p className="title-name text-truncate">
                                 {value.original_title}
                               </p>
-                            </a>
+                            </div>
                           ))}
                         </Slider>
                       )}
                     </Container>
                   </Col>
                 </Row>
-                <Row className="justify-content-md-center movie-section">
+                <Row
+                  className="justify-content-md-center movie-section"
+                  id="trending"
+                >
                   <Col sm="12" md={10}>
-                    <h2>Trending</h2>
-                    <Container className="titles" id="trending">
+                    <Container className="titles">
+                      <h2>Trending</h2>
                       {trending !== null && (
                         <Slider {...settings} className="titles-slider">
                           {trending.results.map((value, index) => (
-                            <a
-                              key={value.id}
-                              href="#"
-                              onClick={(e) => {
-                                e.preventDefault();
-                              }}
-                              tabIndex="0"
-                            >
+                            <div key={value.id}>
                               <div className="title-img-container">
                                 <div className="title-rating">
                                   <i className="fas fa-star"></i>{" "}
@@ -296,28 +272,24 @@ export default class Content extends React.Component {
                               <p className="title-name text-truncate">
                                 {value.original_title}
                               </p>
-                            </a>
+                            </div>
                           ))}
                         </Slider>
                       )}
                     </Container>
                   </Col>
                 </Row>
-                <Row className="justify-content-md-center movie-section">
+                <Row
+                  className="justify-content-md-center movie-section"
+                  id="top-rated"
+                >
                   <Col sm="12" md={10}>
-                    <h2>Top Rated</h2>
-                    <Container className="titles" id="top-rated">
+                    <Container className="titles">
+                      <h2>Top Rated</h2>
                       {topRated !== null && (
                         <Slider {...settings} className="titles-slider">
                           {topRated.results.map((value, index) => (
-                            <a
-                              key={value.id}
-                              href="#"
-                              onClick={(e) => {
-                                e.preventDefault();
-                              }}
-                              tabIndex="0"
-                            >
+                            <div key={value.id}>
                               <div className="title-img-container">
                                 <div className="title-rating">
                                   <i className="fas fa-star"></i>{" "}
@@ -331,11 +303,23 @@ export default class Content extends React.Component {
                               <p className="title-name text-truncate">
                                 {value.original_title}
                               </p>
-                            </a>
+                            </div>
                           ))}
                         </Slider>
                       )}
                     </Container>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <h1>Test</h1>
+                    <h1>Test</h1>
+                    <h1>Test</h1>
+                    <h1>Test</h1>
+                    <h1>Test</h1>
+                    <h1>Test</h1>
+                    <h1>Test</h1>
+                    <h1>Test</h1>
                   </Col>
                 </Row>
               </Container>
