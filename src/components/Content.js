@@ -1,9 +1,17 @@
 import React from "react";
-import { Container, Row, Col, Carousel } from "react-bootstrap";
-import Slider from "react-slick";
 import API from "../api";
-import { Animated } from "react-animated-css";
 import Scrollspy from "react-scrollspy";
+import Slider from "react-slick";
+import { Container, Row, Col, Carousel } from "react-bootstrap";
+import { Animated } from "react-animated-css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPlay,
+  faBolt,
+  faChartLine,
+  faThumbsUp,
+} from "@fortawesome/free-solid-svg-icons";
+import theMovieDBLogo from "../images/tmdb-logo.png";
 
 import "../App.css";
 import "../stylesheets/Content.css";
@@ -115,29 +123,41 @@ export default class Content extends React.Component {
               </p>
               <Scrollspy
                 items={["now-playing", "upcoming", "trending", "top-rated"]}
-                currentClassName="is-current"
-                offset={-120}
+                currentClassName="is-active"
+                componentTag="nav"
+                offset={-100}
+                style={{
+                  padding: "0px",
+                }}
               >
-                <li>
-                  <a href="#now-playing">Now Playing</a>
-                </li>
-                <li>
-                  <a href="#upcoming">Upcoming</a>
-                </li>
-                <li>
-                  <a
-                    href="#trending"
-                  >
-                    Trending
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#top-rated"
-                  >
-                    Top Rated
-                  </a>
-                </li>
+                <a className="sidebar-link" href="#now-playing">
+                  <FontAwesomeIcon
+                    className="sidebar-icon"
+                    icon={faPlay}
+                  ></FontAwesomeIcon>
+                  <span>Now Playing</span>
+                </a>
+                <a className="sidebar-link" href="#upcoming">
+                  <FontAwesomeIcon
+                    className="sidebar-icon"
+                    icon={faBolt}
+                  ></FontAwesomeIcon>
+                  <span>Upcoming</span>
+                </a>
+                <a className="sidebar-link" href="#trending">
+                  <FontAwesomeIcon
+                    className="sidebar-icon"
+                    icon={faChartLine}
+                  ></FontAwesomeIcon>
+                  <span>Trending</span>
+                </a>
+                <a className="sidebar-link" href="#top-rated">
+                  <FontAwesomeIcon
+                    className="sidebar-icon"
+                    icon={faThumbsUp}
+                  ></FontAwesomeIcon>
+                  <span>Top Rated</span>
+                </a>
               </Scrollspy>
             </Container>
           </Col>
@@ -258,7 +278,7 @@ export default class Content extends React.Component {
                       {trending !== null && (
                         <Slider {...settings} className="titles-slider">
                           {trending.results.map((value, index) => (
-                            <div key={value.id}>
+                            <div key={value.id} className="movie-title">
                               <div className="title-img-container">
                                 <div className="title-rating">
                                   <i className="fas fa-star"></i>{" "}
@@ -310,16 +330,20 @@ export default class Content extends React.Component {
                     </Container>
                   </Col>
                 </Row>
-                <Row>
+                <Row className="justify-content-center" id="footer-container">
                   <Col>
-                    <h1>Test</h1>
-                    <h1>Test</h1>
-                    <h1>Test</h1>
-                    <h1>Test</h1>
-                    <h1>Test</h1>
-                    <h1>Test</h1>
-                    <h1>Test</h1>
-                    <h1>Test</h1>
+                    <footer
+                      className="d-flex justify-content-center"
+                      id="footer"
+                    >
+                      <a>
+                        <img
+                          src={theMovieDBLogo}
+                          alt="Powered by The Movie DB"
+                          id="movie-db-logo"
+                        />
+                      </a>
+                    </footer>
                   </Col>
                 </Row>
               </Container>
