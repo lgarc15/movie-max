@@ -186,13 +186,13 @@ export default class Content extends React.Component {
                             className="carousel-item"
                           >
                             <img
-                              className="d-block w-100"
+                              className="d-block w-100 carousel-img"
                               src={`${this.base_img_path}original${value.backdrop_path}`}
                               alt="Fill me in"
                             />
                             <Carousel.Caption>
                               <div className="carousel-meta">
-                                <h1>{value.title}</h1>
+                                <h1 className="carousel-meta-name">{value.title}</h1>
                                 <button className="about-movie-btn my-bg-tertiary">
                                   About Movie
                                 </button>
