@@ -10,13 +10,18 @@ import "../App.css";
 import "../stylesheets/Movie.css";
 import "../stylesheets/MovieSections.css";
 
-import unavailableImage from "../images/unavailable_image.jpeg"
+import unavailableImage from "../images/unavailable_image.jpeg";
 
 export default class MovieSections extends React.Component {
   base_img_path = "https://image.tmdb.org/t/p/";
 
   constructor(props) {
     super(props);
+
+    this.nowPlayingRef = React.createRef();
+    this.upcomingRef = React.createRef();
+    this.trendingRef = React.createRef();
+    this.topRatedRef = React.createRef();
 
     this.state = {
       popular: null,
@@ -32,7 +37,44 @@ export default class MovieSections extends React.Component {
     return response.status === 200 ? response.data : null;
   }
 
+  jumpToHash = () => {
+    const hash = this.props.location.hash;
+    if (hash) {
+      let ref = null;
+      switch (hash) {
+        case "#now-playing":
+          ref = this.nowPlayingRef;
+          break;
+        case "#upcoming":
+          ref = this.upcomingRef;
+          break;
+        case "#trending":
+          ref = this.trendingRef;
+          break;
+        case "#top-rated":
+          ref = this.topRatedRef;
+          break;
+        default:
+          console.error(`INVALID REF = "${hash}"`);
+      }
+      if (ref && ref.current) {
+        window.scrollTo({
+          top: ref.current.offsetTop,
+          left: 0,
+          behavior: "smooth",
+        });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }
+  };
+
+  componentDidUpdate() {
+    this.jumpToHash();
+  }
+
   componentDidMount() {
+    this.jumpToHash();
     Promise.all([
       API.get("movie/popular"),
       API.get("movie/now_playing"),
@@ -56,7 +98,6 @@ export default class MovieSections extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     const { popular, nowPlaying, upcoming, trending, topRated } = this.state;
     const settings = {
       infinite: false,
@@ -138,6 +179,7 @@ export default class MovieSections extends React.Component {
           </Row>
           <Row
             className="justify-content-md-center movie-section"
+            ref={this.nowPlayingRef}
             id="now-playing"
           >
             <Col sm="12" md={10}>
@@ -153,7 +195,11 @@ export default class MovieSections extends React.Component {
                             <span>{value.vote_average}</span>
                           </div>
                           <img
-                            src={value.poster_path ? `${this.base_img_path}w342${value.poster_path}` : unavailableImage}
+                            src={
+                              value.poster_path
+                                ? `${this.base_img_path}w342${value.poster_path}`
+                                : unavailableImage
+                            }
                             alt=""
                           />
                         </div>
@@ -169,6 +215,7 @@ export default class MovieSections extends React.Component {
           </Row>
           <Row
             className="justify-content-md-center movie-section"
+            ref={this.upcomingRef}
             id="upcoming"
           >
             <Col sm="12" md={10}>
@@ -184,7 +231,11 @@ export default class MovieSections extends React.Component {
                             <span>{value.vote_average}</span>
                           </div>
                           <img
-                            src={value.poster_path ? `${this.base_img_path}w342${value.poster_path}` : unavailableImage}
+                            src={
+                              value.poster_path
+                                ? `${this.base_img_path}w342${value.poster_path}`
+                                : unavailableImage
+                            }
                             alt=""
                           />
                         </div>
@@ -200,6 +251,7 @@ export default class MovieSections extends React.Component {
           </Row>
           <Row
             className="justify-content-md-center movie-section"
+            ref={this.trendingRef}
             id="trending"
           >
             <Col sm="12" md={10}>
@@ -215,7 +267,11 @@ export default class MovieSections extends React.Component {
                             <span>{value.vote_average}</span>
                           </div>
                           <img
-                            src={value.poster_path ? `${this.base_img_path}w342${value.poster_path}` : unavailableImage}
+                            src={
+                              value.poster_path
+                                ? `${this.base_img_path}w342${value.poster_path}`
+                                : unavailableImage
+                            }
                             alt=""
                           />
                         </div>
@@ -231,6 +287,7 @@ export default class MovieSections extends React.Component {
           </Row>
           <Row
             className="justify-content-md-center movie-section"
+            ref={this.topRatedRef}
             id="top-rated"
           >
             <Col sm="12" md={10}>
@@ -246,7 +303,11 @@ export default class MovieSections extends React.Component {
                             <span>{value.vote_average}</span>
                           </div>
                           <img
-                            src={value.poster_path ? `${this.base_img_path}w342${value.poster_path}` : unavailableImage}
+                            src={
+                              value.poster_path
+                                ? `${this.base_img_path}w342${value.poster_path}`
+                                : unavailableImage
+                            }
                             alt=""
                           />
                         </div>
