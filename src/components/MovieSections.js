@@ -69,8 +69,10 @@ export default class MovieSections extends React.Component {
     }
   };
 
-  componentDidUpdate() {
-    this.jumpToHash();
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props !== prevProps || this.state !== prevState) {
+      this.jumpToHash();
+    }
   }
 
   componentDidMount() {
@@ -150,29 +152,27 @@ export default class MovieSections extends React.Component {
             <Col className="carousel-container">
               <Carousel id="carousel">
                 {popular !== null &&
-                  popular.results.map((value, index) => {
-                    if (index < 3) {
-                      return (
-                        <Carousel.Item key={value.id} className="carousel-item">
-                          <img
-                            className="d-block w-100 carousel-img"
-                            src={`${this.base_img_path}original${value.backdrop_path}`}
-                            alt="Fill me in"
-                          />
-                          <Carousel.Caption>
-                            <div className="carousel-meta">
-                              <h1 className="carousel-meta-name">
-                                {value.title}
-                              </h1>
-                              <button className="about-movie-btn my-bg-tertiary">
-                                About Movie
-                              </button>
-                            </div>
-                            {/* <p>This is some text that must be here.</p> */}
-                          </Carousel.Caption>
-                        </Carousel.Item>
-                      );
-                    }
+                  popular.results.slice(0, 3).map((value, index) => {
+                    return (
+                      <Carousel.Item key={value.id} className="carousel-item">
+                        <img
+                          className="d-block w-100 carousel-img"
+                          src={`${this.base_img_path}original${value.backdrop_path}`}
+                          alt="Fill me in"
+                        />
+                        <Carousel.Caption>
+                          <div className="carousel-meta">
+                            <h1 className="carousel-meta-name">
+                              {value.title}
+                            </h1>
+                            <button className="about-movie-btn my-bg-tertiary">
+                              About Movie
+                            </button>
+                          </div>
+                          {/* <p>This is some text that must be here.</p> */}
+                        </Carousel.Caption>
+                      </Carousel.Item>
+                    );
                   })}
               </Carousel>
             </Col>
