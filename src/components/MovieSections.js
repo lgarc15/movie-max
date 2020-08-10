@@ -14,10 +14,9 @@ import "../stylesheets/MovieSections.css";
 import unavailableImage from "../images/unavailable_image.jpeg";
 
 export default class MovieSections extends React.Component {
-  base_img_path = "https://image.tmdb.org/t/p/";
-
   constructor(props) {
     super(props);
+    console.log(props);
 
     this.nowPlayingRef = React.createRef();
     this.upcomingRef = React.createRef();
@@ -164,7 +163,7 @@ export default class MovieSections extends React.Component {
                       <Carousel.Item key={value.id} className="carousel-item">
                         <img
                           className="d-block w-100 carousel-img"
-                          src={`${this.base_img_path}original${value.backdrop_path}`}
+                          src={`${this.props.baseImgPath}original${value.backdrop_path}`}
                           alt="Fill me in"
                         />
                         <Carousel.Caption>
@@ -195,7 +194,11 @@ export default class MovieSections extends React.Component {
                 {nowPlaying !== null && (
                   <Slider {...settings} className="titles-slider">
                     {nowPlaying.results.map((value, index) => (
-                      <Link key={value.id} to={`/movie?movie_id=${value.id}`}>
+                      <Link key={value.id} to={{
+                        pathname: '/movie',
+                        search: `movie_id=${value.id}`,
+                        state: value
+                      }}>
                         <div className="title-img-container">
                           <div className="title-rating">
                             <i className="fas fa-star"></i>{" "}
@@ -204,7 +207,7 @@ export default class MovieSections extends React.Component {
                           <img
                             src={
                               value.poster_path
-                                ? `${this.base_img_path}w342${value.poster_path}`
+                                ? `${this.props.baseImgPath}w342${value.poster_path}`
                                 : unavailableImage
                             }
                             alt=""
@@ -240,7 +243,7 @@ export default class MovieSections extends React.Component {
                           <img
                             src={
                               value.poster_path
-                                ? `${this.base_img_path}w342${value.poster_path}`
+                                ? `${this.props.baseImgPath}w342${value.poster_path}`
                                 : unavailableImage
                             }
                             alt=""
@@ -276,7 +279,7 @@ export default class MovieSections extends React.Component {
                           <img
                             src={
                               value.poster_path
-                                ? `${this.base_img_path}w342${value.poster_path}`
+                                ? `${this.props.baseImgPath}w342${value.poster_path}`
                                 : unavailableImage
                             }
                             alt=""
@@ -312,7 +315,7 @@ export default class MovieSections extends React.Component {
                           <img
                             src={
                               value.poster_path
-                                ? `${this.base_img_path}w342${value.poster_path}`
+                                ? `${this.props.baseImgPath}w342${value.poster_path}`
                                 : unavailableImage
                             }
                             alt=""

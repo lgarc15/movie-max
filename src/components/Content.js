@@ -11,6 +11,8 @@ import "../stylesheets/Content.css";
 import Sidebar from "./Sidebar";
 
 export default class Content extends React.Component {
+  BASE_IMG_PATH = "https://image.tmdb.org/t/p/";
+
   render() {
     return (
       <Container className="my-bg-primary" id="main-container" fluid>
@@ -32,11 +34,16 @@ export default class Content extends React.Component {
             xl={{ span: 10, offset: 2 }}
             id="content-container"
           >
-
             {/* ----- MAIN CONTENT PAGES ----- */}
             <Switch>
-              <Route exact path="/" component={MovieSections} />
-              <Route path="/movie" component={Movie} />
+              <Route
+                exact path="/"
+                render={(props) => <MovieSections {...props} baseImgPath={this.BASE_IMG_PATH} />}
+              />
+              <Route
+                path="/movie"
+                render={(props) => <Movie {...props} baseImgPath={this.BASE_IMG_PATH} />}
+              />
             </Switch>
 
             {/* ----- FOOTER ----- */}
