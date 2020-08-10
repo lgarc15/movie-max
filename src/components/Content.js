@@ -2,6 +2,7 @@ import React from "react";
 import API from "../api";
 import Scrollspy from "react-scrollspy";
 import Slider from "react-slick";
+import { Link } from "react-router-dom";
 import { Container, Row, Col, Carousel } from "react-bootstrap";
 import { Animated } from "react-animated-css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -60,7 +61,6 @@ export default class Content extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     const { popular, nowPlaying, upcoming, trending, topRated } = this.state;
     const settings = {
       infinite: false,
@@ -176,36 +176,40 @@ export default class Content extends React.Component {
               isVisible={true}
             >
               <Container id="content" fluid>
-                <Carousel id="carousel">
-                  {popular !== null &&
-                    popular.results.map((value, index) => {
-                      if (index < 3) {
-                        return (
-                          <Carousel.Item
-                            key={value.id}
-                            className="carousel-item"
-                          >
-                            <img
-                              className="d-block w-100 carousel-img"
-                              src={`${this.base_img_path}original${value.backdrop_path}`}
-                              alt="Fill me in"
-                            />
-                            <Carousel.Caption>
-                              <div className="carousel-meta">
-                                <h1 className="carousel-meta-name">{value.title}</h1>
-                                <button className="about-movie-btn my-bg-tertiary">
-                                  About Movie
-                                </button>
-                              </div>
-                              {/* <p>This is some text that must be here.</p> */}
-                            </Carousel.Caption>
-                          </Carousel.Item>
-                        );
-                      }
-                    })}
-                </Carousel>
-              </Container>
-              <Container fluid>
+                <Row>
+                  <Col>
+                    <Carousel id="carousel">
+                      {popular !== null &&
+                        popular.results.map((value, index) => {
+                          if (index < 3) {
+                            return (
+                              <Carousel.Item
+                                key={value.id}
+                                className="carousel-item"
+                              >
+                                <img
+                                  className="d-block w-100 carousel-img"
+                                  src={`${this.base_img_path}original${value.backdrop_path}`}
+                                  alt="Fill me in"
+                                />
+                                <Carousel.Caption>
+                                  <div className="carousel-meta">
+                                    <h1 className="carousel-meta-name">
+                                      {value.title}
+                                    </h1>
+                                    <button className="about-movie-btn my-bg-tertiary">
+                                      About Movie
+                                    </button>
+                                  </div>
+                                  {/* <p>This is some text that must be here.</p> */}
+                                </Carousel.Caption>
+                              </Carousel.Item>
+                            );
+                          }
+                        })}
+                    </Carousel>
+                  </Col>
+                </Row>
                 <Row
                   className="justify-content-md-center movie-section"
                   id="now-playing"
@@ -330,6 +334,8 @@ export default class Content extends React.Component {
                     </Container>
                   </Col>
                 </Row>
+              </Container>
+              <Container>
                 <Row className="justify-content-center" id="footer-container">
                   <Col>
                     <footer

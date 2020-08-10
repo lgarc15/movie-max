@@ -1,12 +1,13 @@
 import React from "react";
 
 import TopNavbar from "./components/TopNavbar";
-import Content from "./components/Content"
-import { Spinner } from "react-bootstrap"
+import Content from "./components/Content";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 function demoAsyncCall() {
@@ -14,9 +15,8 @@ function demoAsyncCall() {
 }
 
 export default class App extends React.Component {
-
   state = {
-    loading: true
+    loading: true,
   };
 
   componentDidMount() {
@@ -27,7 +27,7 @@ export default class App extends React.Component {
   render() {
     const { loading } = this.state;
 
-    // if(loading) { // if your component doesn't have to wait for async data, remove this block 
+    // if(loading) { // if your component doesn't have to wait for async data, remove this block
     //   return (
     //     <div className="my-bg-secondary" id="page-loader-container">
     //       <Spinner animation="grow" className="my-cl-tertiary" id="page-loader" />
@@ -36,11 +36,12 @@ export default class App extends React.Component {
     // }
 
     return (
-      <div className="App">
-        <TopNavbar />
-        <Content />
-      </div>
+      <Router>
+        <div className="App">
+          <TopNavbar />
+          <Content />
+        </div>
+      </Router>
     );
   }
 }
-
