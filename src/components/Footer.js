@@ -14,7 +14,7 @@ export default class Footer extends React.Component {
         <Row className="justify-content-center" id="footer-container">
           <Col>
             <footer className="d-flex justify-content-center" id="footer">
-              <a>
+              <a href="https://www.themoviedb.org/">
                 <img
                   src={theMovieDBLogo}
                   alt="Powered by The Movie DB"
