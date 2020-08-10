@@ -10,6 +10,8 @@ import "../App.css";
 import "../stylesheets/Movie.css";
 import "../stylesheets/MovieSections.css";
 
+import unavailableImage from "../images/unavailable_image.jpeg"
+
 export default class MovieSections extends React.Component {
   base_img_path = "https://image.tmdb.org/t/p/";
 
@@ -151,7 +153,7 @@ export default class MovieSections extends React.Component {
                             <span>{value.vote_average}</span>
                           </div>
                           <img
-                            src={`${this.base_img_path}w342${value.poster_path}`}
+                            src={value.poster_path ? `${this.base_img_path}w342${value.poster_path}` : unavailableImage}
                             alt=""
                           />
                         </div>
@@ -182,7 +184,7 @@ export default class MovieSections extends React.Component {
                             <span>{value.vote_average}</span>
                           </div>
                           <img
-                            src={`${this.base_img_path}w342${value.poster_path}`}
+                            src={value.poster_path ? `${this.base_img_path}w342${value.poster_path}` : unavailableImage}
                             alt=""
                           />
                         </div>
@@ -213,7 +215,7 @@ export default class MovieSections extends React.Component {
                             <span>{value.vote_average}</span>
                           </div>
                           <img
-                            src={`${this.base_img_path}w342${value.poster_path}`}
+                            src={value.poster_path ? `${this.base_img_path}w342${value.poster_path}` : unavailableImage}
                             alt=""
                           />
                         </div>
@@ -244,7 +246,7 @@ export default class MovieSections extends React.Component {
                             <span>{value.vote_average}</span>
                           </div>
                           <img
-                            src={`${this.base_img_path}w342${value.poster_path}`}
+                            src={value.poster_path ? `${this.base_img_path}w342${value.poster_path}` : unavailableImage}
                             alt=""
                           />
                         </div>
