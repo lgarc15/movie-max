@@ -5,6 +5,7 @@ import Slider from "react-slick";
 
 import { Container, Row, Col, Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { Animated } from "react-animated-css";
 
 import "../App.css";
 import "../stylesheets/Movie.css";
@@ -146,7 +147,13 @@ export default class MovieSections extends React.Component {
       ],
     };
     return (
-      <div id="movie-sections">
+      <Animated
+      animationIn="fadeInRight"
+      animationInDuration={500}
+      animationOutDuration={500}
+      isVisible={true}
+      className="animated-section"
+    >
         <Container fluid>
           <Row>
             <Col className="carousel-container">
@@ -322,7 +329,7 @@ export default class MovieSections extends React.Component {
             </Col>
           </Row>
         </Container>
-      </div>
+      </Animated>
     );
   }
 }

@@ -1,12 +1,10 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import { Animated } from "react-animated-css";
 
 import MovieSections from "./MovieSections";
 import Movie from "./Movie";
 import Footer from "./Footer";
-
 
 import "../App.css";
 import "../stylesheets/Content.css";
@@ -24,6 +22,7 @@ export default class Content extends React.Component {
             className="d-none d-md-inline"
             id="sidebar-container"
           >
+            {/* ----- SIDEBAR ----- */}
             <Sidebar />
           </Col>
           <Col
@@ -33,20 +32,15 @@ export default class Content extends React.Component {
             xl={{ span: 10, offset: 2 }}
             id="content-container"
           >
-            <Animated
-              animationIn="fadeInRight"
-              animationOut="fadeOut"
-              animationInDuration={500}
-              animationOutDuration={500}
-              isVisible={true}
-            >
-              <Switch>
-                <Route exact path="/" component={MovieSections} />
-                <Route path="/movie" component={Movie} />
-              </Switch>
 
-              <Footer />
-            </Animated>
+            {/* ----- MAIN CONTENT PAGES ----- */}
+            <Switch>
+              <Route exact path="/" component={MovieSections} />
+              <Route path="/movie" component={Movie} />
+            </Switch>
+
+            {/* ----- FOOTER ----- */}
+            <Footer />
           </Col>
         </Row>
       </Container>

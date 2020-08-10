@@ -14,3 +14,11 @@ li {
     height: 4em;
     width: 4em;
 }
+
+.animated-section {
+    padding: 0;
+}
+
+.animated-section > div {
+    padding: 0;
+}
