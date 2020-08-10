@@ -2,7 +2,7 @@ import React from "react";
 import API from "../api";
 import Scrollspy from "react-scrollspy";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
+import { Switch, Link, Route } from "react-router-dom";
 import { Container, Row, Col, Carousel } from "react-bootstrap";
 import { Animated } from "react-animated-css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -175,184 +175,198 @@ export default class Content extends React.Component {
               animationOutDuration={500}
               isVisible={true}
             >
-              <Container id="content" fluid>
-                <Row>
-                  <Col>
-                    <Carousel id="carousel">
-                      {popular !== null &&
-                        popular.results.map((value, index) => {
-                          if (index < 3) {
-                            return (
-                              <Carousel.Item
-                                key={value.id}
-                                className="carousel-item"
-                              >
-                                <img
-                                  className="d-block w-100 carousel-img"
-                                  src={`${this.base_img_path}original${value.backdrop_path}`}
-                                  alt="Fill me in"
-                                />
-                                <Carousel.Caption>
-                                  <div className="carousel-meta">
-                                    <h1 className="carousel-meta-name">
-                                      {value.title}
-                                    </h1>
-                                    <button className="about-movie-btn my-bg-tertiary">
-                                      About Movie
-                                    </button>
-                                  </div>
-                                  {/* <p>This is some text that must be here.</p> */}
-                                </Carousel.Caption>
-                              </Carousel.Item>
-                            );
-                          }
-                        })}
-                    </Carousel>
-                  </Col>
-                </Row>
-                <Row
-                  className="justify-content-md-center movie-section"
-                  id="now-playing"
-                >
-                  <Col sm="12" md={10}>
-                    <Container className="titles">
-                      <h2>Now Playing</h2>
-                      {nowPlaying !== null && (
-                        <Slider {...settings} className="titles-slider">
-                          {nowPlaying.results.map((value, index) => (
-                            <div key={value.id}>
-                              <div className="title-img-container">
-                                <div className="title-rating">
-                                  <i className="fas fa-star"></i>{" "}
-                                  <span>{value.vote_average}</span>
-                                </div>
-                                <img
-                                  src={`${this.base_img_path}w342${value.poster_path}`}
-                                  alt=""
-                                />
-                              </div>
-                              <p className="title-name text-truncate">
-                                {value.original_title}
-                              </p>
-                            </div>
-                          ))}
-                        </Slider>
-                      )}
-                    </Container>
-                  </Col>
-                </Row>
-                <Row
-                  className="justify-content-md-center movie-section"
-                  id="upcoming"
-                >
-                  <Col sm="12" md={10}>
-                    <Container className="titles">
-                      <h2>Upcoming</h2>
-                      {upcoming !== null && (
-                        <Slider {...settings} className="titles-slider">
-                          {upcoming.results.map((value, index) => (
-                            <div key={value.id}>
-                              <div className="title-img-container">
-                                <div className="title-rating">
-                                  <i className="fas fa-star"></i>{" "}
-                                  <span>{value.vote_average}</span>
-                                </div>
-                                <img
-                                  src={`${this.base_img_path}w342${value.poster_path}`}
-                                  alt=""
-                                />
-                              </div>
-                              <p className="title-name text-truncate">
-                                {value.original_title}
-                              </p>
-                            </div>
-                          ))}
-                        </Slider>
-                      )}
-                    </Container>
-                  </Col>
-                </Row>
-                <Row
-                  className="justify-content-md-center movie-section"
-                  id="trending"
-                >
-                  <Col sm="12" md={10}>
-                    <Container className="titles">
-                      <h2>Trending</h2>
-                      {trending !== null && (
-                        <Slider {...settings} className="titles-slider">
-                          {trending.results.map((value, index) => (
-                            <div key={value.id} className="movie-title">
-                              <div className="title-img-container">
-                                <div className="title-rating">
-                                  <i className="fas fa-star"></i>{" "}
-                                  <span>{value.vote_average}</span>
-                                </div>
-                                <img
-                                  src={`${this.base_img_path}w342${value.poster_path}`}
-                                  alt=""
-                                />
-                              </div>
-                              <p className="title-name text-truncate">
-                                {value.original_title}
-                              </p>
-                            </div>
-                          ))}
-                        </Slider>
-                      )}
-                    </Container>
-                  </Col>
-                </Row>
-                <Row
-                  className="justify-content-md-center movie-section"
-                  id="top-rated"
-                >
-                  <Col sm="12" md={10}>
-                    <Container className="titles">
-                      <h2>Top Rated</h2>
-                      {topRated !== null && (
-                        <Slider {...settings} className="titles-slider">
-                          {topRated.results.map((value, index) => (
-                            <div key={value.id}>
-                              <div className="title-img-container">
-                                <div className="title-rating">
-                                  <i className="fas fa-star"></i>{" "}
-                                  <span>{value.vote_average}</span>
-                                </div>
-                                <img
-                                  src={`${this.base_img_path}w342${value.poster_path}`}
-                                  alt=""
-                                />
-                              </div>
-                              <p className="title-name text-truncate">
-                                {value.original_title}
-                              </p>
-                            </div>
-                          ))}
-                        </Slider>
-                      )}
-                    </Container>
-                  </Col>
-                </Row>
-              </Container>
-              <Container>
-                <Row className="justify-content-center" id="footer-container">
-                  <Col>
-                    <footer
-                      className="d-flex justify-content-center"
-                      id="footer"
+              <Switch>
+
+                <Route exact path="/">
+                  <Container id="content" fluid>
+                    <Row>
+                      <Col>
+                        <Carousel id="carousel">
+                          {popular !== null &&
+                            popular.results.map((value, index) => {
+                              if (index < 3) {
+                                return (
+                                  <Carousel.Item
+                                    key={value.id}
+                                    className="carousel-item"
+                                  >
+                                    <img
+                                      className="d-block w-100 carousel-img"
+                                      src={`${this.base_img_path}original${value.backdrop_path}`}
+                                      alt="Fill me in"
+                                    />
+                                    <Carousel.Caption>
+                                      <div className="carousel-meta">
+                                        <h1 className="carousel-meta-name">
+                                          {value.title}
+                                        </h1>
+                                        <button className="about-movie-btn my-bg-tertiary">
+                                          About Movie
+                                        </button>
+                                      </div>
+                                      {/* <p>This is some text that must be here.</p> */}
+                                    </Carousel.Caption>
+                                  </Carousel.Item>
+                                );
+                              }
+                            })}
+                        </Carousel>
+                      </Col>
+                    </Row>
+                    <Row
+                      className="justify-content-md-center movie-section"
+                      id="now-playing"
                     >
-                      <a>
-                        <img
-                          src={theMovieDBLogo}
-                          alt="Powered by The Movie DB"
-                          id="movie-db-logo"
-                        />
-                      </a>
-                    </footer>
-                  </Col>
-                </Row>
-              </Container>
+                      <Col sm="12" md={10}>
+                        <Container className="titles">
+                          <h2>Now Playing</h2>
+                          {nowPlaying !== null && (
+                            <Slider {...settings} className="titles-slider">
+                              {nowPlaying.results.map((value, index) => (
+                                <Link key={value.id} to={`/movie?movie_id=${value.id}`}>
+                                  <div className="title-img-container">
+                                    <div className="title-rating">
+                                      <i className="fas fa-star"></i>{" "}
+                                      <span>{value.vote_average}</span>
+                                    </div>
+                                    <img
+                                      src={`${this.base_img_path}w342${value.poster_path}`}
+                                      alt=""
+                                    />
+                                  </div>
+                                  <p className="title-name text-truncate">
+                                    {value.original_title}
+                                  </p>
+                                </Link>
+                              ))}
+                            </Slider>
+                          )}
+                        </Container>
+                      </Col>
+                    </Row>
+                    <Row
+                      className="justify-content-md-center movie-section"
+                      id="upcoming"
+                    >
+                      <Col sm="12" md={10}>
+                        <Container className="titles">
+                          <h2>Upcoming</h2>
+                          {upcoming !== null && (
+                            <Slider {...settings} className="titles-slider">
+                              {upcoming.results.map((value, index) => (
+                                <Link key={value.id} to={`/movie?movie_id=${value.id}`}>
+                                  <div className="title-img-container">
+                                    <div className="title-rating">
+                                      <i className="fas fa-star"></i>{" "}
+                                      <span>{value.vote_average}</span>
+                                    </div>
+                                    <img
+                                      src={`${this.base_img_path}w342${value.poster_path}`}
+                                      alt=""
+                                    />
+                                  </div>
+                                  <p className="title-name text-truncate">
+                                    {value.original_title}
+                                  </p>
+                                </Link>
+                              ))}
+                            </Slider>
+                          )}
+                        </Container>
+                      </Col>
+                    </Row>
+                    <Row
+                      className="justify-content-md-center movie-section"
+                      id="trending"
+                    >
+                      <Col sm="12" md={10}>
+                        <Container className="titles">
+                          <h2>Trending</h2>
+                          {trending !== null && (
+                            <Slider {...settings} className="titles-slider">
+                              {trending.results.map((value, index) => (
+                                <Link key={value.id} to={`/movie?movie_id=${value.id}`}>
+                                  <div className="title-img-container">
+                                    <div className="title-rating">
+                                      <i className="fas fa-star"></i>{" "}
+                                      <span>{value.vote_average}</span>
+                                    </div>
+                                    <img
+                                      src={`${this.base_img_path}w342${value.poster_path}`}
+                                      alt=""
+                                    />
+                                  </div>
+                                  <p className="title-name text-truncate">
+                                    {value.original_title}
+                                  </p>
+                                </Link>
+                              ))}
+                            </Slider>
+                          )}
+                        </Container>
+                      </Col>
+                    </Row>
+                    <Row
+                      className="justify-content-md-center movie-section"
+                      id="top-rated"
+                    >
+                      <Col sm="12" md={10}>
+                        <Container className="titles">
+                          <h2>Top Rated</h2>
+                          {topRated !== null && (
+                            <Slider {...settings} className="titles-slider">
+                              {topRated.results.map((value, index) => (
+                                <Link key={value.id} to={`/movie?movie_id=${value.id}`}>
+                                  <div className="title-img-container">
+                                    <div className="title-rating">
+                                      <i className="fas fa-star"></i>{" "}
+                                      <span>{value.vote_average}</span>
+                                    </div>
+                                    <img
+                                      src={`${this.base_img_path}w342${value.poster_path}`}
+                                      alt=""
+                                    />
+                                  </div>
+                                  <p className="title-name text-truncate">
+                                    {value.original_title}
+                                  </p>
+                                </Link>
+                              ))}
+                            </Slider>
+                          )}
+                        </Container>
+                      </Col>
+                    </Row>
+                  </Container>
+                  <Container>
+                    <Row
+                      className="justify-content-center"
+                      id="footer-container"
+                    >
+                      <Col>
+                        <footer
+                          className="d-flex justify-content-center"
+                          id="footer"
+                        >
+                          <a>
+                            <img
+                              src={theMovieDBLogo}
+                              alt="Powered by The Movie DB"
+                              id="movie-db-logo"
+                            />
+                          </a>
+                        </footer>
+                      </Col>
+                    </Row>
+                  </Container>
+                </Route>
+
+                <Route path="/movie">
+                  This is another page.
+                </Route>
+
+              </Switch>
+              
             </Animated>
           </Col>
         </Row>
