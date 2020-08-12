@@ -149,8 +149,10 @@ export default class MovieSections extends React.Component {
         animationIn="fadeInRight"
         animationInDuration={500}
         animationOutDuration={500}
-        isVisible={true}
         className="animated-section"
+        style={{
+          visibility: popular ? "visible" : "hidden",
+        }}
       >
         <Container fluid>
           <Row>
@@ -163,7 +165,7 @@ export default class MovieSections extends React.Component {
                         <img
                           className="d-block w-100 carousel-img"
                           src={`${this.props.baseImgPath}original${value.backdrop_path}`}
-                          alt="Movie Poster"
+                          alt="Movie Poster`"
                         />
                         <Carousel.Caption>
                           <div className="carousel-meta">
@@ -193,10 +195,7 @@ export default class MovieSections extends React.Component {
                 {nowPlaying !== null && (
                   <Slider {...settings} className="titles-slider">
                     {nowPlaying.results.map((value, index) => (
-                      <Link
-                        key={value.id}
-                        to={`/movie/${value.id}`}
-                      >
+                      <Link key={value.id} to={`/movie/${value.id}`}>
                         <div className="title-img-container">
                           <div className="title-rating">
                             <i className="fas fa-star"></i>{" "}
@@ -232,10 +231,7 @@ export default class MovieSections extends React.Component {
                 {upcoming !== null && (
                   <Slider {...settings} className="titles-slider">
                     {upcoming.results.map((value, index) => (
-                      <Link
-                        key={value.id}
-                        to={`/movie/${value.id}`}
-                      >
+                      <Link key={value.id} to={`/movie/${value.id}`}>
                         <div className="title-img-container">
                           <div className="title-rating">
                             <i className="fas fa-star"></i>{" "}
@@ -271,10 +267,7 @@ export default class MovieSections extends React.Component {
                 {trending !== null && (
                   <Slider {...settings} className="titles-slider">
                     {trending.results.map((value, index) => (
-                      <Link
-                        key={value.id}
-                        to={`/movie/${value.id}`}
-                      >
+                      <Link key={value.id} to={`/movie/${value.id}`}>
                         <div className="title-img-container">
                           <div className="title-rating">
                             <i className="fas fa-star"></i>{" "}
@@ -310,10 +303,7 @@ export default class MovieSections extends React.Component {
                 {topRated !== null && (
                   <Slider {...settings} className="titles-slider">
                     {topRated.results.map((value, index) => (
-                      <Link
-                        key={value.id}
-                        to={`/movie/${value.id}`}
-                      >
+                      <Link key={value.id} to={`/movie/${value.id}`}>
                         <div className="title-img-container">
                           <div className="title-rating">
                             <i className="fas fa-star"></i>{" "}

@@ -18,7 +18,6 @@ export default class TopNavbar extends React.Component {
   constructor(props) {
     super(props);
 
-    // TODO: Check if props.location.state is set. If not, attempt to search for the movie and render it.
     this.state = {
       movieDetails: null,
       movieVideos: null,
@@ -27,7 +26,7 @@ export default class TopNavbar extends React.Component {
     };
   }
 
-  //Return the data if the request was successful, otherwise `null`
+  // Return the data if the request was successful, otherwise `null`
   getMovieResponse(response) {
     return response.status === 200 ? response.data : null;
   }
@@ -53,7 +52,7 @@ export default class TopNavbar extends React.Component {
       });
   }
 
-  showSimilarMovie = movieId => e => {
+  showSimilarMovie = (movieId) => (e) => {
     // param is the argument you passed to the function
     // e is the event object that returned
     this.getMovieInfo(movieId);
@@ -64,12 +63,22 @@ export default class TopNavbar extends React.Component {
     this.getMovieInfo(movieId);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props !== prevProps || this.state !== prevState) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  }
+
   render() {
     const {
       movieDetails,
       movieVideos,
       similarMovies,
-      movieCredits
+      movieCredits,
     } = this.state;
     const settings = {
       infinite: false,
@@ -121,10 +130,12 @@ export default class TopNavbar extends React.Component {
         animationIn="fadeInRight"
         animationInDuration={500}
         animationOutDuration={500}
-        isVisible={true}
-        className="animated-section"
+        className={"animated-section"}
+        style={{
+          visibility: movieDetails ? "visible" : "hidden",
+        }}
       >
-        <Container className="" id="movie-poster-container" fluid>
+        <Container id="movie-poster-container" fluid>
           <Row>
             <Col>
               <div id="movie-poster">
@@ -175,8 +186,6 @@ export default class TopNavbar extends React.Component {
         </Container>
         <Container id="movie-info-container" fluid>
           <Row id="movie-info">
-            {/* <Col>Status: {movieDetails && movieDetails.status}</Col> */}
-
             <Col
               xs={{ span: 10, offset: 1 }}
               sm={{ span: 10, offset: 1 }}
@@ -197,6 +206,7 @@ export default class TopNavbar extends React.Component {
                       {movieVideos ? (
                         <div class="iframe-container">
                           <iframe
+                            // TODO: Some movies might not have a key
                             src={`https://www.youtube-nocookie.com/embed/${movieVideos.results[0].key}`}
                             allowFullScreen
                           />
@@ -256,9 +266,7 @@ export default class TopNavbar extends React.Component {
                           alt=""
                         />
                       </div>
-                      <p className="title-name text-truncate">
-                        {value.name}
-                      </p>
+                      <p className="title-name text-truncate">{value.name}</p>
                       <p className="title-name text-truncate">
                         {value.character}
                       </p>
@@ -281,35 +289,34 @@ export default class TopNavbar extends React.Component {
             >
               <h2>Related Movies</h2>
               {similarMovies !== null && (
-                  <Slider {...settings} className="titles-slider">
-                    {similarMovies.results.map((value, index) => (
-                      <Link
-                        key={value.id}
-                        to={`/movie/${value.id}`}
-                        // TODO: This should be uncommented and animation should be retriggered after clicking on similar movie.
-                        // onClick={this.showSimilarMovie(value.id)}
-                      >
-                        <div className="title-img-container">
-                          <div className="title-rating">
-                            <i className="fas fa-star"></i>{" "}
-                            <span>{value.vote_average}</span>
-                          </div>
-                          <img
-                            src={
-                              value.poster_path
-                                ? `${this.props.baseImgPath}w342${value.poster_path}`
-                                : unavailableImage
-                            }
-                            alt=""
-                          />
+                <Slider {...settings} className="titles-slider">
+                  {similarMovies.results.map((value, index) => (
+                    <Link
+                      key={value.id}
+                      to={`/movie/${value.id}`}
+                      onClick={this.showSimilarMovie(value.id)}
+                    >
+                      <div className="title-img-container">
+                        <div className="title-rating">
+                          <i className="fas fa-star"></i>{" "}
+                          <span>{value.vote_average}</span>
                         </div>
-                        <p className="title-name text-truncate">
-                          {value.original_title}
-                        </p>
-                      </Link>
-                    ))}
-                  </Slider>
-                )}
+                        <img
+                          src={
+                            value.poster_path
+                              ? `${this.props.baseImgPath}w342${value.poster_path}`
+                              : unavailableImage
+                          }
+                          alt=""
+                        />
+                      </div>
+                      <p className="title-name text-truncate">
+                        {value.original_title}
+                      </p>
+                    </Link>
+                  ))}
+                </Slider>
+              )}
             </Col>
           </Row>
           {/* END: RELATED MOVIES */}

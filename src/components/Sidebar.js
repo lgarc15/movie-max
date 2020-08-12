@@ -11,14 +11,13 @@ import {
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
 
-import "../App.css"
-import "../stylesheets/Sidebar.css"
-
+import "../App.css";
+import "../stylesheets/Sidebar.css";
 
 export default class Sidebar extends React.Component {
   render() {
     return (
-        <Container id="sidebar">
+      <Container id="sidebar">
         <p className="my-cl-tertiary" id="sidebar-title">
           Browse
         </p>
