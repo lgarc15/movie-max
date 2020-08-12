@@ -16,7 +16,6 @@ import unavailableImage from "../images/unavailable_image.jpeg";
 export default class MovieSections extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
 
     this.nowPlayingRef = React.createRef();
     this.upcomingRef = React.createRef();
@@ -33,7 +32,7 @@ export default class MovieSections extends React.Component {
   }
 
   //Return the data if the request was successful, otherwise `null`
-  getMovieListResponse(response) {
+  getMovieResponse(response) {
     return response.status === 200 ? response.data : null;
   }
 
@@ -86,11 +85,11 @@ export default class MovieSections extends React.Component {
     ])
       .then(([popular, nowPlaying, upcoming, trending, topRated]) => {
         this.setState({
-          popular: this.getMovieListResponse(popular),
-          nowPlaying: this.getMovieListResponse(nowPlaying),
-          upcoming: this.getMovieListResponse(upcoming),
-          trending: this.getMovieListResponse(trending),
-          topRated: this.getMovieListResponse(topRated),
+          popular: this.getMovieResponse(popular),
+          nowPlaying: this.getMovieResponse(nowPlaying),
+          upcoming: this.getMovieResponse(upcoming),
+          trending: this.getMovieResponse(trending),
+          topRated: this.getMovieResponse(topRated),
         });
       })
       .catch(function (error) {
@@ -147,12 +146,12 @@ export default class MovieSections extends React.Component {
     };
     return (
       <Animated
-      animationIn="fadeInRight"
-      animationInDuration={500}
-      animationOutDuration={500}
-      isVisible={true}
-      className="animated-section"
-    >
+        animationIn="fadeInRight"
+        animationInDuration={500}
+        animationOutDuration={500}
+        isVisible={true}
+        className="animated-section"
+      >
         <Container fluid>
           <Row>
             <Col className="carousel-container">
@@ -164,7 +163,7 @@ export default class MovieSections extends React.Component {
                         <img
                           className="d-block w-100 carousel-img"
                           src={`${this.props.baseImgPath}original${value.backdrop_path}`}
-                          alt="Fill me in"
+                          alt="Movie Poster"
                         />
                         <Carousel.Caption>
                           <div className="carousel-meta">
@@ -194,11 +193,10 @@ export default class MovieSections extends React.Component {
                 {nowPlaying !== null && (
                   <Slider {...settings} className="titles-slider">
                     {nowPlaying.results.map((value, index) => (
-                      <Link key={value.id} to={{
-                        pathname: '/movie',
-                        search: `movie_id=${value.id}`,
-                        state: value
-                      }}>
+                      <Link
+                        key={value.id}
+                        to={`/movie/${value.id}`}
+                      >
                         <div className="title-img-container">
                           <div className="title-rating">
                             <i className="fas fa-star"></i>{" "}
@@ -234,7 +232,10 @@ export default class MovieSections extends React.Component {
                 {upcoming !== null && (
                   <Slider {...settings} className="titles-slider">
                     {upcoming.results.map((value, index) => (
-                      <Link key={value.id} to={`/movie?movie_id=${value.id}`}>
+                      <Link
+                        key={value.id}
+                        to={`/movie/${value.id}`}
+                      >
                         <div className="title-img-container">
                           <div className="title-rating">
                             <i className="fas fa-star"></i>{" "}
@@ -270,7 +271,10 @@ export default class MovieSections extends React.Component {
                 {trending !== null && (
                   <Slider {...settings} className="titles-slider">
                     {trending.results.map((value, index) => (
-                      <Link key={value.id} to={`/movie?movie_id=${value.id}`}>
+                      <Link
+                        key={value.id}
+                        to={`/movie/${value.id}`}
+                      >
                         <div className="title-img-container">
                           <div className="title-rating">
                             <i className="fas fa-star"></i>{" "}
@@ -306,7 +310,10 @@ export default class MovieSections extends React.Component {
                 {topRated !== null && (
                   <Slider {...settings} className="titles-slider">
                     {topRated.results.map((value, index) => (
-                      <Link key={value.id} to={`/movie?movie_id=${value.id}`}>
+                      <Link
+                        key={value.id}
+                        to={`/movie/${value.id}`}
+                      >
                         <div className="title-img-container">
                           <div className="title-rating">
                             <i className="fas fa-star"></i>{" "}

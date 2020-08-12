@@ -41,8 +41,9 @@ export default class Content extends React.Component {
                 render={(props) => <MovieSections {...props} baseImgPath={this.BASE_IMG_PATH} />}
               />
               <Route
-                path="/movie"
-                render={(props) => <Movie {...props} baseImgPath={this.BASE_IMG_PATH} />}
+                path="/movie/:id"
+                // TODO: key shold be removed, so re render does not occur for every movie.
+                render={(props) => <Movie {...props} baseImgPath={this.BASE_IMG_PATH} key={window.location.pathname} />}
               />
             </Switch>
 
