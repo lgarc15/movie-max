@@ -14,7 +14,7 @@ import "../App.css";
 import "../stylesheets/Movie.css";
 import "../stylesheets/Content.css";
 
-export default class TopNavbar extends React.Component {
+export default class Movie extends React.Component {
   constructor(props) {
     super(props);
 
@@ -255,7 +255,10 @@ export default class TopNavbar extends React.Component {
               {movieCredits && (
                 <Slider {...settings} className="titles-slider">
                   {movieCredits.cast.map((value, index) => (
-                    <Link key={value.id} to={`/movie/${value.id}`}>
+                    <Link
+                      key={value.id} 
+                      to={`/person/${value.id}`}
+                    >
                       <div className="title-img-container">
                         <img
                           src={

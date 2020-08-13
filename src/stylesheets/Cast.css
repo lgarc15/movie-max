@@ -1,0 +1,14 @@
+#cast-member-container {
+}
+
+#cast-member-container > div {
+    margin: 0;
+}
+
+#cast-info {
+    padding: 0;
+}
+
+#cast-info-img {
+    height: 280px;
+}

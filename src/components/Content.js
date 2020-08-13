@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import "../App.css";
 import "../stylesheets/Content.css";
 import Sidebar from "./Sidebar";
+import Cast from "./Cast";
 
 export default class Content extends React.Component {
   BASE_IMG_PATH = "https://image.tmdb.org/t/p/";
@@ -47,6 +48,12 @@ export default class Content extends React.Component {
                 path="/movie/:id"
                 render={(props) => (
                   <Movie {...props} baseImgPath={this.BASE_IMG_PATH} />
+                )}
+              />
+              <Route
+                path="/person/:id"
+                render={(props) => (
+                  <Cast {...props} baseImgPath={this.BASE_IMG_PATH} />
                 )}
               />
             </Switch>
