@@ -4,8 +4,8 @@ import API from "../api";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Animated } from "react-animated-css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import unavailableImage from "../images/unavailable_image.jpeg";
 
@@ -56,50 +56,6 @@ export default class Cast extends React.Component {
 
   render() {
     const { person, personCredits } = this.state;
-    const settings = {
-      infinite: false,
-      arrows: true,
-      draggable: true,
-      slidesToShow: 6,
-      slidesToScroll: 6,
-      responsive: [
-        {
-          breakpoint: 1200,
-          settings: {
-            slidesToShow: 6,
-            slidesToScroll: 1,
-          },
-        },
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 5,
-            slidesToScroll: 5,
-          },
-        },
-        {
-          breakpoint: 992,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4,
-          },
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-          },
-        },
-        {
-          breakpoint: 576,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-          },
-        },
-      ],
-    };
 
     return (
       <Animated

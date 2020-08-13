@@ -80,6 +80,9 @@ export default class Movie extends React.Component {
       similarMovies,
       movieCredits,
     } = this.state;
+    if(movieDetails) {
+      // console.log(movieDetails.production_companies);
+    }
     const settings = {
       infinite: false,
       arrows: true,
@@ -170,9 +173,9 @@ export default class Movie extends React.Component {
                         movieDetails.genres.map((value, index) => {
                           const genreLen = movieDetails.genres.length;
                           if (index + 1 === genreLen) {
-                            return <span>{value.name}</span>;
+                            return <span key={value.id}>{value.name}</span>;
                           } else {
-                            return <span>{value.name} | </span>;
+                            return <span key={value.id}>{value.name} | </span>;
                           }
                         })}
                     </span>
@@ -204,15 +207,16 @@ export default class Movie extends React.Component {
                     <Col lg={10} id="movie-trailer">
                       <h2>{movieDetails && movieDetails.original_title}</h2>
                       {movieVideos ? (
-                        <div class="iframe-container">
+                        <div className="iframe-container">
                           <iframe
                             // TODO: Some movies might not have a key
+                            title={movieVideos.results[0].key}
                             src={`https://www.youtube-nocookie.com/embed/${movieVideos.results[0].key}`}
                             allowFullScreen
                           />
                         </div>
                       ) : (
-                        <p class="lead">
+                        <p className="lead">
                           We we\'re unable to find a video preview for this
                           movie :/
                         </p>
@@ -234,7 +238,7 @@ export default class Movie extends React.Component {
                             (value, index, self) =>
                               self.indexOf(value) === index
                           )
-                          .map((prod_comp) => <li>{prod_comp}</li>)}
+                          .map((prod_comp) => <li key={prod_comp}>{prod_comp}</li>)}
                     </ul>
                   </div>
                 </Col>
