@@ -17,6 +17,11 @@
     font-size: 2em;
 }
 
+#top-navbar-brand a {
+    text-decoration: none;
+    color:rgb(255, 42, 85);
+}
+
 #top-navbar-search-btn {
     border: none;
 }
