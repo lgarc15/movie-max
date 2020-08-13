@@ -4,8 +4,8 @@ import API from "../api";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Animated } from "react-animated-css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 
 import unavailableImage from "../images/unavailable_image.jpeg";
 
@@ -63,13 +63,11 @@ export default class Cast extends React.Component {
         animationInDuration={500}
         animationOutDuration={500}
         className={"animated-section"}
-        style={{
-          visibility: person ? "visible" : "hidden",
-        }}
+        isVisible={true}
       >
         <Container id="cast-member-container" fluid>
           {person && (
-            <Row>
+            <Row className="mt-4">
               <Col
                 md={{ span: 8, offset: 2 }}
                 className="text-center"
@@ -82,36 +80,46 @@ export default class Cast extends React.Component {
                     id="cast-info-img"
                   />
                 </span>
-                <h1>{person && person.name}</h1>
-                <p>{person && person.place_of_birth}</p>
+                <h1 className="mt-3">{person && person.name}</h1>
+                <p id="cast-birthplace-container">
+                  <FontAwesomeIcon
+                    id="cast-birthplace-logo"
+                    icon={faGlobeAmericas}
+                  ></FontAwesomeIcon>
+                  <span id="cast-birthplace">{person && person.place_of_birth}</span>
+                </p>
               </Col>
             </Row>
           )}
-          <h1>Movie Appearances</h1>
-          <p>Showing {personCredits && personCredits.cast.length} results</p>
           <Row>
+            <Col xs={12} sm={12} md={12} lg={12} xl={12}>
+              <h2 className="mt-5">Movie Appearances</h2>
+              <p className="movie-apperance-results">
+                Showing {personCredits && personCredits.cast.length} results
+              </p>
+            </Col>
             {personCredits &&
               personCredits.cast.map((value, index) => (
-                <Col xs={6} sm={4} md={3} lg={2} className="mb-5">
+                <Col xs={6} sm={4} md={3} lg={2} className="mt-4 mb-4">
                   <Link key={value.id} to={`/movie/${value.id}`}>
-                        <div className="title-img-container">
-                          <div className="title-rating">
-                            <i className="fas fa-star"></i>{" "}
-                            <span>{value.vote_average}</span>
-                          </div>
-                          <img
-                            src={
-                              value.poster_path
-                                ? `${this.props.baseImgPath}w342${value.poster_path}`
-                                : unavailableImage
-                            }
-                            alt=""
-                          />
-                        </div>
-                        <p className="title-name text-truncate">
-                          {value.original_title}
-                        </p>
-                      </Link>
+                    <div className="title-img-container">
+                      <div className="title-rating">
+                        <i className="fas fa-star"></i>{" "}
+                        <span>{value.vote_average}</span>
+                      </div>
+                      <img
+                        src={
+                          value.poster_path
+                            ? `${this.props.baseImgPath}w342${value.poster_path}`
+                            : unavailableImage
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <p className="title-name text-truncate">
+                      {value.original_title}
+                    </p>
+                  </Link>
                 </Col>
               ))}
           </Row>

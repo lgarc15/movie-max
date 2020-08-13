@@ -12,3 +12,23 @@
 #cast-info-img {
     height: 280px;
 }
+
+#cast-birthplace-container {
+    font-size: 1.2em;
+    font-weight: 400;
+    color: rgb(108, 117, 125);
+    /* border: 1px solid green; */
+}
+
+#cast-birthplace-logo {
+    /* border: 1px solid red; */
+}
+
+#cast-birthplace {
+    margin-left: 5px;
+}
+
+.movie-apperance-results {
+    font-weight: 700;
+    font-size: 1.2em;
+}

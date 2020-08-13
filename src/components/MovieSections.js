@@ -150,9 +150,7 @@ export default class MovieSections extends React.Component {
         animationInDuration={500}
         animationOutDuration={500}
         className="animated-section"
-        style={{
-          visibility: popular ? "visible" : "hidden",
-        }}
+        isVisible={true}
       >
         <Container fluid>
           <Row>

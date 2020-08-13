@@ -30,6 +30,8 @@
     padding: 8px 0;
     text-decoration: none !important;
     color: rgb(105, 108, 128);
+    cursor: pointer;
+    /* cursor: pointer !important; */
 }
 
 .sidebar-link svg {

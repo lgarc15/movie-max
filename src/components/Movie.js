@@ -23,6 +23,7 @@ export default class Movie extends React.Component {
       movieVideos: null,
       movieCredits: null,
       similarMovies: null,
+      movieReviews: null
     };
   }
 
@@ -37,13 +38,15 @@ export default class Movie extends React.Component {
       API.get(`movie/${movieId}/videos`),
       API.get(`movie/${movieId}/similar`),
       API.get(`movie/${movieId}/credits`),
+      API.get(`/movie/${movieId}/reviews`)
     ])
-      .then(([movieDetails, movieVideos, similarMovies, movieCredits]) => {
+      .then(([movieDetails, movieVideos, similarMovies, movieCredits, movieReviews]) => {
         this.setState({
           movieDetails: this.getMovieResponse(movieDetails),
           movieVideos: this.getMovieResponse(movieVideos),
           similarMovies: this.getMovieResponse(similarMovies),
           movieCredits: this.getMovieResponse(movieCredits),
+          movieReviews: this.getMovieResponse(movieReviews)
         });
       })
       .catch(function (error) {
@@ -79,6 +82,7 @@ export default class Movie extends React.Component {
       movieVideos,
       similarMovies,
       movieCredits,
+      movieReviews
     } = this.state;
     if(movieDetails) {
       // console.log(movieDetails.production_companies);
@@ -134,9 +138,7 @@ export default class Movie extends React.Component {
         animationInDuration={500}
         animationOutDuration={500}
         className={"animated-section"}
-        style={{
-          visibility: movieDetails ? "visible" : "hidden",
-        }}
+        isVisible={true}
       >
         <Container id="movie-poster-container" fluid>
           <Row>
@@ -196,18 +198,18 @@ export default class Movie extends React.Component {
               lg={{ span: 10, offset: 1 }}
               xl={{ span: 10, offset: 1 }}
             >
-              <Row>
+              <Row className="mt-5">
                 <Col lg={10}>
-                  <p>
+                  <p className="my-cl-tertiary" id="movie-status">
                     Status: <span>{movieDetails && movieDetails.status}</span>
                   </p>
 
                   {/* ----- START: MOVIE TRAILER ----- */}
                   <Row>
                     <Col lg={10} id="movie-trailer">
-                      <h2>{movieDetails && movieDetails.original_title}</h2>
+                      <h3>Watch Trailer</h3>
                       {movieVideos ? (
-                        <div className="iframe-container">
+                        <div className="mt-3 iframe-container">
                           <iframe
                             // TODO: Some movies might not have a key
                             title={movieVideos.results[0].key}
@@ -225,11 +227,11 @@ export default class Movie extends React.Component {
                   </Row>
                   {/* ----- END: MOVIE TRAILER ----- */}
 
-                  <div>
-                    <h2>Summary</h2>
+                  <div className="mt-5">
+                    <h3>Summary</h3>
                     <p>{movieDetails && movieDetails.overview}</p>
 
-                    <h2>Production Countries</h2>
+                    <h4 className="mt-4">Production Countries</h4>
                     <ul>
                       {movieDetails &&
                         movieDetails.production_companies
@@ -247,7 +249,7 @@ export default class Movie extends React.Component {
           </Row>
 
           {/* START: CAST */}
-          <Row id="cast-container">
+          <Row className="mt-5" id="cast-container">
             <Col
               xs={{ span: 10, offset: 1 }}
               sm={{ span: 10, offset: 1 }}
@@ -255,7 +257,7 @@ export default class Movie extends React.Component {
               lg={{ span: 10, offset: 1 }}
               xl={{ span: 10, offset: 1 }}
             >
-              <h2>Cast</h2>
+              <h2 className="mb-4">Cast</h2>
               {movieCredits && (
                 <Slider {...settings} className="titles-slider">
                   {movieCredits.cast.map((value, index) => (
@@ -286,7 +288,7 @@ export default class Movie extends React.Component {
           {/* END: CAST */}
 
           {/* START: RELATED MOVIES */}
-          <Row>
+          <Row className="mt-5">
             <Col
               xs={{ span: 10, offset: 1 }}
               sm={{ span: 10, offset: 1 }}
@@ -294,9 +296,10 @@ export default class Movie extends React.Component {
               lg={{ span: 10, offset: 1 }}
               xl={{ span: 10, offset: 1 }}
             >
-              <h2>Related Movies</h2>
-              {similarMovies !== null && (
-                <Slider {...settings} className="titles-slider">
+              <h2 className="mb-4">Related Movies</h2>
+              {(similarMovies && similarMovies.results.length > 0)
+                ? (
+                  <Slider {...settings} className="titles-slider">
                   {similarMovies.results.map((value, index) => (
                     <Link
                       key={value.id}
@@ -323,13 +326,17 @@ export default class Movie extends React.Component {
                     </Link>
                   ))}
                 </Slider>
-              )}
+                )
+                : (
+                  <h5 className="mt-4">No movies found, we're sorry :/</h5>
+                )
+              }
             </Col>
           </Row>
           {/* END: RELATED MOVIES */}
 
           {/* START: REVIEWS */}
-          <Row>
+          <Row className="mt-5">
             <Col
               xs={{ span: 10, offset: 1 }}
               sm={{ span: 10, offset: 1 }}
@@ -338,7 +345,17 @@ export default class Movie extends React.Component {
               xl={{ span: 10, offset: 1 }}
               id="review-container"
             >
-              asdf
+              <h2 className="mb-4">Recent Reviews</h2>
+              {(movieReviews && movieReviews.results.length > 0)
+              ? (
+                movieReviews.results.map((value, index) => (
+                  <p className="movie-review">{value.content} <br /><span className="movie-review-author">- {value.author}</span></p>
+                ))
+              )
+              : (
+                <h5 className="mt-4">No movies found, we're sorry :/</h5>
+              )
+              }
             </Col>
           </Row>
           {/* END: REVIEWS */}
