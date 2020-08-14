@@ -1,4 +1,6 @@
 import React from "react";
+import API from "../api";
+import { withRouter } from "react-router-dom"
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -7,14 +9,51 @@ import brandLogo from "../images/brand_logo.png";
 import "../App.css";
 import "../stylesheets/TopNavbar.css";
 
-export default class TopNavbar extends React.Component {
+class TopNavbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchTerm: ''
+    };
+  }
+
+  // Return the data if the request was successful, otherwise `null`
+  getResponse(response) {
+    return response.status === 200 ? response.data : null;
+  }
+
+  handleInputChange = (e) => {
+    this.setState({ searchTerm: e.target.value });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { searchTerm } = this.state;
+    if(searchTerm.length > 0) {
+      API.get(`/search/movie?query=${searchTerm}`)
+        .then(response => {
+          this.setState({ searchTerm: '' });
+          this.props.history.push({
+            pathname: '/movies',
+            search: `?query=${searchTerm}`,
+            state: {
+              searchResults: this.getResponse(response)
+            }
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        })
+    }
+  }
+
   render() {
     return (
       <Navbar expand="lg" id="top-navbar">
         <Navbar.Brand className="my-cl-tertiary" id="top-navbar-brand">
           <Link to={{
-              pathname: "/",
-              hash: "#main-container"
+              pathname: "/"
             }}>
             <img
               alt=""
@@ -30,8 +69,8 @@ export default class TopNavbar extends React.Component {
         <Navbar.Collapse id="top-navbar-content">
           <Nav className="mr-auto" />
           <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-2" />
-            <Button className="my-bg-tertiary" id="top-navbar-search-btn">
+            <FormControl onChange={this.handleInputChange} type="text" placeholder="Search" className="mr-2" />
+            <Button onClick={this.handleSubmit} className="my-bg-tertiary" id="top-navbar-search-btn">
               Search
             </Button>
           </Form>
@@ -40,3 +79,5 @@ export default class TopNavbar extends React.Component {
     );
   }
 }
+
+export default withRouter(TopNavbar);

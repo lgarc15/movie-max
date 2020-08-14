@@ -10,6 +10,7 @@ import "../App.css";
 import "../stylesheets/Content.css";
 import Sidebar from "./Sidebar";
 import Cast from "./Cast";
+import MovieSearchResults from "./MovieSearchResults";
 
 export default class Content extends React.Component {
   BASE_IMG_PATH = "https://image.tmdb.org/t/p/";
@@ -54,6 +55,12 @@ export default class Content extends React.Component {
                 path="/person/:id"
                 render={(props) => (
                   <Cast {...props} baseImgPath={this.BASE_IMG_PATH} />
+                )}
+              />
+              <Route
+                path="/movies"
+                render={(props) => (
+                  <MovieSearchResults {...props} baseImgPath={this.BASE_IMG_PATH} />
                 )}
               />
             </Switch>
