@@ -36,7 +36,7 @@ class TopNavbar extends React.Component {
 
   render() {
     return (
-      <Navbar expand="lg" id="top-navbar">
+      <Navbar expand="lg" fixed="top" id="top-navbar">
         <Navbar.Brand className="my-cl-tertiary" id="top-navbar-brand">
           <Link
             to={{
@@ -56,22 +56,25 @@ class TopNavbar extends React.Component {
         <Navbar.Toggle aria-controls="top-navbar-content" />
         <Navbar.Collapse id="top-navbar-content">
           <Nav className="mr-auto" />
-          <Form inline>
-            <FormControl
-              onChange={this.handleInputChange}
-              type="text"
-              placeholder="Search"
-              value={this.state.searchTerm}
-              className="mr-2"
-            />
-            <Button
-              onClick={this.handleSubmit}
-              className="my-bg-tertiary"
-              id="top-navbar-search-btn"
-            >
-              Search
-            </Button>
-          </Form>
+          <Nav id="top-navbar-search-form-container">
+            <Form id="top-navbar-search-form" inline>
+              <FormControl
+                onChange={this.handleInputChange}
+                type="text"
+                placeholder="Search"
+                value={this.state.searchTerm}
+                className="mr-2"
+                id="top-navbar-search-input"
+              />
+              <Button
+                onClick={this.handleSubmit}
+                className="my-bg-tertiary"
+                id="top-navbar-search-btn"
+              >
+                Search
+              </Button>
+            </Form>
+          </Nav>
         </Navbar.Collapse>
       </Navbar>
     );
