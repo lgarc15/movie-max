@@ -32,3 +32,18 @@
     font-weight: 700;
     font-size: 1.2em;
 }
+
+.movie-apperance-link {
+    text-decoration: none !important;
+}
+
+.movie-apperance {
+    opacity: 0.7;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.movie-apperance:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}

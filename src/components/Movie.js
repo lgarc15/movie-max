@@ -234,13 +234,9 @@ export default class Movie extends React.Component {
                     <h4 className="mt-4">Production Countries</h4>
                     <ul>
                       {movieDetails &&
-                        movieDetails.production_companies
-                          .map((prod_comp) => prod_comp.origin_country)
-                          .filter(
-                            (value, index, self) =>
-                              self.indexOf(value) === index
-                          )
-                          .map((prod_comp) => <li key={prod_comp}>{prod_comp}</li>)}
+                        movieDetails.production_countries.map((value, index) => (
+                        <li key={index}>{value.iso_3166_1} ({value.name})</li>
+                        ))}
                     </ul>
                   </div>
                 </Col>

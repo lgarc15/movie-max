@@ -86,7 +86,9 @@ export default class Cast extends React.Component {
                     id="cast-birthplace-logo"
                     icon={faGlobeAmericas}
                   ></FontAwesomeIcon>
-                  <span id="cast-birthplace">{person && person.place_of_birth}</span>
+                  <span id="cast-birthplace">
+                    {person && person.place_of_birth}
+                  </span>
                 </p>
               </Col>
             </Row>
@@ -101,24 +103,30 @@ export default class Cast extends React.Component {
             {personCredits &&
               personCredits.cast.map((value, index) => (
                 <Col xs={6} sm={4} md={3} lg={2} className="mt-4 mb-4">
-                  <Link key={value.id} to={`/movie/${value.id}`}>
-                    <div className="title-img-container">
-                      <div className="title-rating">
-                        <i className="fas fa-star"></i>{" "}
-                        <span>{value.vote_average}</span>
+                  <Link
+                    key={value.id}
+                    to={`/movie/${value.id}`}
+                    className="movie-apperance-link"
+                  >
+                    <div className="movie-apperance">
+                      <div className="title-img-container">
+                        <div className="title-rating">
+                          <i className="fas fa-star"></i>{" "}
+                          <span>{value.vote_average}</span>
+                        </div>
+                        <img
+                          src={
+                            value.poster_path
+                              ? `${this.props.baseImgPath}w342${value.poster_path}`
+                              : unavailableImage
+                          }
+                          alt=""
+                        />
                       </div>
-                      <img
-                        src={
-                          value.poster_path
-                            ? `${this.props.baseImgPath}w342${value.poster_path}`
-                            : unavailableImage
-                        }
-                        alt=""
-                      />
+                      <p className="title-name text-truncate">
+                        {value.original_title}
+                      </p>
                     </div>
-                    <p className="title-name text-truncate">
-                      {value.original_title}
-                    </p>
                   </Link>
                 </Col>
               ))}
