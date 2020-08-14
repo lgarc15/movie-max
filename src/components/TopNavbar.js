@@ -38,7 +38,8 @@ class TopNavbar extends React.Component {
             pathname: '/movies',
             search: `?query=${searchTerm}`,
             state: {
-              searchResults: this.getResponse(response)
+              searchResults: this.getResponse(response),
+              searchTerm: searchTerm
             }
           });
         })

@@ -14,7 +14,7 @@ import "../stylesheets/MovieSearchResults.css";
 
 export default class MovieSearchResults extends React.Component {
   render() {
-    const { searchResults } = this.props.history.location.state;
+    const { searchResults, searchTerm } = this.props.history.location.state;
 
     return (
       <Animated
@@ -29,7 +29,7 @@ export default class MovieSearchResults extends React.Component {
             <Col xs={12} sm={12} md={12} lg={12} xl={12}>
               <h2>Search</h2>
               <p>
-                Showing {searchResults && searchResults.results.length} results
+                Showing {searchResults && searchResults.results.length} results for "{searchTerm}"
               </p>
             </Col>
             {searchResults &&
