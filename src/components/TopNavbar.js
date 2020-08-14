@@ -24,9 +24,7 @@ class TopNavbar extends React.Component {
     e.preventDefault();
 
     const { searchTerm } = this.state;
-    console.log('1');
     this.setState({ searchTerm: "" });
-    console.log('2');
 
     if (searchTerm.length > 0) {
       this.props.history.push({

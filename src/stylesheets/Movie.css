@@ -1,7 +1,10 @@
-#movie {}
-
 #movie-poster-container {
     position: relative;
+}
+
+#movie-poster-alt-title-container {
+    display: flex;
+    align-items: center;
 }
 
 #movie-img {

@@ -23,7 +23,7 @@ export default class Movie extends React.Component {
       movieVideos: null,
       movieCredits: null,
       similarMovies: null,
-      movieReviews: null
+      movieReviews: null,
     };
   }
 
@@ -38,17 +38,25 @@ export default class Movie extends React.Component {
       API.get(`movie/${movieId}/videos`),
       API.get(`movie/${movieId}/similar`),
       API.get(`movie/${movieId}/credits`),
-      API.get(`/movie/${movieId}/reviews`)
+      API.get(`/movie/${movieId}/reviews`),
     ])
-      .then(([movieDetails, movieVideos, similarMovies, movieCredits, movieReviews]) => {
-        this.setState({
-          movieDetails: this.getMovieResponse(movieDetails),
-          movieVideos: this.getMovieResponse(movieVideos),
-          similarMovies: this.getMovieResponse(similarMovies),
-          movieCredits: this.getMovieResponse(movieCredits),
-          movieReviews: this.getMovieResponse(movieReviews)
-        });
-      })
+      .then(
+        ([
+          movieDetails,
+          movieVideos,
+          similarMovies,
+          movieCredits,
+          movieReviews,
+        ]) => {
+          this.setState({
+            movieDetails: this.getMovieResponse(movieDetails),
+            movieVideos: this.getMovieResponse(movieVideos),
+            similarMovies: this.getMovieResponse(similarMovies),
+            movieCredits: this.getMovieResponse(movieCredits),
+            movieReviews: this.getMovieResponse(movieReviews),
+          });
+        }
+      )
       .catch(function (error) {
         // if there's an error, log it
         console.log(error);
@@ -82,9 +90,9 @@ export default class Movie extends React.Component {
       movieVideos,
       similarMovies,
       movieCredits,
-      movieReviews
+      movieReviews,
     } = this.state;
-    if(movieDetails) {
+    if (movieDetails) {
       // console.log(movieDetails.production_companies);
     }
     const settings = {
@@ -142,20 +150,68 @@ export default class Movie extends React.Component {
       >
         <Container id="movie-poster-container" fluid>
           <Row>
-            <Col>
-              <div id="movie-poster">
-                <img
-                  src={
-                    movieDetails &&
-                    `${this.props.baseImgPath}original${movieDetails.backdrop_path}`
-                  }
-                  alt="Movie Poster"
-                  className="d-block w-100"
-                  id="movie-img"
-                />
-                <div id="movie-meta">
+            {movieDetails && movieDetails.backdrop_path ? (
+              <Col>
+                <div id="movie-poster">
+                  <img
+                    src={`${this.props.baseImgPath}original${movieDetails.backdrop_path}`}
+                    alt="Movie Poster"
+                    className="d-block w-100"
+                    id="movie-img"
+                  />
+                  <div id="movie-meta">
+                    <div className="movie-meta-desc" id="movie-meta-rating">
+                      <FontAwesomeIcon
+                        id="movie-meta-rating-icon"
+                        icon={faStar}
+                      ></FontAwesomeIcon>
+                      <span>
+                        {" "}
+                        {movieDetails && movieDetails.vote_average} / 10
+                      </span>
+                    </div>
+                    <div className="movie-meta-desc" id="movie-meta-title">
+                      {movieDetails && movieDetails.original_title}
+                    </div>
+                    <div className="movie-meta-desc" id="movie-meta-info">
+                      <span>{movieDetails && movieDetails.release_date}</span>
+                      <span> &bull; </span>
+                      <span>
+                        {movieDetails &&
+                          movieDetails.genres.map((value, index) => {
+                            const genreLen = movieDetails.genres.length;
+                            if (index + 1 === genreLen) {
+                              return <span key={value.id}>{value.name}</span>;
+                            } else {
+                              return (
+                                <span key={value.id}>{value.name} | </span>
+                              );
+                            }
+                          })}
+                      </span>
+                      <span> &bull; </span>
+                      <span>{movieDetails && movieDetails.runtime} mins</span>
+                    </div>
+                  </div>
+                </div>
+              </Col>
+            ) : (
+              <Col
+                xs={{ span: 10, offset: 1 }}
+                sm={{ span: 10, offset: 1 }}
+                md={{ span: 10, offset: 1 }}
+                lg={{ span: 10, offset: 1 }}
+                xl={{ span: 10, offset: 1 }}
+                className="mt-4"
+                id="movie-poster-alt"
+              >
+                <div id="movie-poster-alt-title-container">
+                  <h1 id="movie-poster-alt-title">
+                    {movieDetails && movieDetails.original_title}
+                  </h1>
+                  &nbsp;
                   <div className="movie-meta-desc" id="movie-meta-rating">
-                    <FontAwesomeIcon
+                    (<FontAwesomeIcon
                       id="movie-meta-rating-icon"
                       icon={faStar}
                     ></FontAwesomeIcon>
@@ -163,30 +219,28 @@ export default class Movie extends React.Component {
                       {" "}
                       {movieDetails && movieDetails.vote_average} / 10
                     </span>
-                  </div>
-                  <div className="movie-meta-desc" id="movie-meta-title">
-                    {movieDetails && movieDetails.original_title}
-                  </div>
-                  <div className="movie-meta-desc" id="movie-meta-info">
-                    <span>{movieDetails && movieDetails.release_date}</span>
-                    <span> &bull; </span>
-                    <span>
-                      {movieDetails &&
-                        movieDetails.genres.map((value, index) => {
-                          const genreLen = movieDetails.genres.length;
-                          if (index + 1 === genreLen) {
-                            return <span key={value.id}>{value.name}</span>;
-                          } else {
-                            return <span key={value.id}>{value.name} | </span>;
-                          }
-                        })}
-                    </span>
-                    <span> &bull; </span>
-                    <span>{movieDetails && movieDetails.runtime} mins</span>
+                    )
                   </div>
                 </div>
-              </div>
-            </Col>
+                <div className="movie-meta-desc mt-2" id="movie-meta-info">
+                  <span>{movieDetails && movieDetails.release_date}</span>
+                  <span> &bull; </span>
+                  <span>
+                    {movieDetails &&
+                      movieDetails.genres.map((value, index) => {
+                        const genreLen = movieDetails.genres.length;
+                        if (index + 1 === genreLen) {
+                          return <span key={value.id}>{value.name}</span>;
+                        } else {
+                          return <span key={value.id}>{value.name} | </span>;
+                        }
+                      })}
+                  </span>
+                  <span> &bull; </span>
+                  <span>{movieDetails && movieDetails.runtime} mins</span>
+                </div>
+              </Col>
+            )}
           </Row>
         </Container>
         <Container id="movie-info-container" fluid>
@@ -208,7 +262,7 @@ export default class Movie extends React.Component {
                   <Row>
                     <Col lg={10} id="movie-trailer">
                       <h3>Watch Trailer</h3>
-                      {movieVideos ? (
+                      {movieVideos && movieVideos.results.length > 0 ? (
                         <div className="mt-3 iframe-container">
                           <iframe
                             // TODO: Some movies might not have a key
@@ -234,9 +288,13 @@ export default class Movie extends React.Component {
                     <h4 className="mt-4">Production Countries</h4>
                     <ul>
                       {movieDetails &&
-                        movieDetails.production_countries.map((value, index) => (
-                        <li key={index}>{value.iso_3166_1} ({value.name})</li>
-                        ))}
+                        movieDetails.production_countries.map(
+                          (value, index) => (
+                            <li key={index}>
+                              {value.iso_3166_1} ({value.name})
+                            </li>
+                          )
+                        )}
                     </ul>
                   </div>
                 </Col>
@@ -257,10 +315,7 @@ export default class Movie extends React.Component {
               {movieCredits && (
                 <Slider {...settings} className="titles-slider">
                   {movieCredits.cast.map((value, index) => (
-                    <Link
-                      key={value.id} 
-                      to={`/person/${value.id}`}
-                    >
+                    <Link key={value.id} to={`/person/${value.id}`}>
                       <div className="title-img-container">
                         <img
                           src={
@@ -293,9 +348,8 @@ export default class Movie extends React.Component {
               xl={{ span: 10, offset: 1 }}
             >
               <h2 className="mb-4">Related Movies</h2>
-              {(similarMovies && similarMovies.results.length > 0)
-                ? (
-                  <Slider {...settings} className="titles-slider">
+              {similarMovies && similarMovies.results.length > 0 ? (
+                <Slider {...settings} className="titles-slider">
                   {similarMovies.results.map((value, index) => (
                     <Link
                       key={value.id}
@@ -322,11 +376,9 @@ export default class Movie extends React.Component {
                     </Link>
                   ))}
                 </Slider>
-                )
-                : (
-                  <h5 className="mt-4">No movies found, we're sorry :/</h5>
-                )
-              }
+              ) : (
+                <h5 className="mt-4">No movies found, we're sorry :/</h5>
+              )}
             </Col>
           </Row>
           {/* END: RELATED MOVIES */}
@@ -342,16 +394,18 @@ export default class Movie extends React.Component {
               id="review-container"
             >
               <h2 className="mb-4">Recent Reviews</h2>
-              {(movieReviews && movieReviews.results.length > 0)
-              ? (
+              {movieReviews && movieReviews.results.length > 0 ? (
                 movieReviews.results.map((value, index) => (
-                  <p className="movie-review">{value.content} <br /><span className="movie-review-author">- {value.author}</span></p>
+                  <p className="movie-review">
+                    {value.content} <br />
+                    <span className="movie-review-author">
+                      - {value.author}
+                    </span>
+                  </p>
                 ))
-              )
-              : (
+              ) : (
                 <h5 className="mt-4">No movies found, we're sorry :/</h5>
-              )
-              }
+              )}
             </Col>
           </Row>
           {/* END: REVIEWS */}
