@@ -20,10 +20,6 @@
     color:rgb(255, 42, 85);
 }
 
-#top-navbar-search-btn {
-    border: none;
-}
-
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
     #top-navbar-search-form-container {

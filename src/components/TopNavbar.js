@@ -59,17 +59,17 @@ class TopNavbar extends React.Component {
           <Nav id="top-navbar-search-form-container">
             <Form id="top-navbar-search-form" inline>
               <FormControl
-                onChange={this.handleInputChange}
                 type="text"
                 placeholder="Search"
-                value={this.state.searchTerm}
                 className="mr-2"
                 id="top-navbar-search-input"
+                value={this.state.searchTerm}
+                onChange={this.handleInputChange}
               />
               <Button
-                onClick={this.handleSubmit}
                 className="my-bg-tertiary"
                 id="top-navbar-search-btn"
+                onClick={this.handleSubmit}
               >
                 Search
               </Button>
