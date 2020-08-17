@@ -9,10 +9,10 @@ import { Animated } from "react-animated-css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 
-import unavailableImage from "../images/unavailable_image.jpeg";
-
 import "../App.css";
 import "../stylesheets/Cast.css";
+
+import unavailableImage from "../images/unavailable_image.jpeg";
 
 export default class Cast extends React.Component {
   constructor(props) {

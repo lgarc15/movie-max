@@ -2,6 +2,8 @@ import React from "react";
 import API from "../api";
 import Slider from "react-slick";
 
+import MovieSlider from "./MovieSlider";
+
 import { getResponseData } from "../utils/Utils";
 
 import { Container, Row, Col } from "react-bootstrap";
@@ -10,11 +12,10 @@ import { Animated } from "react-animated-css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-import unavailableImage from "../images/unavailable_image.jpeg";
-
 import "../App.css";
 import "../stylesheets/Movie.css";
-import MovieSlider from "./MovieSlider";
+
+import unavailableImage from "../images/unavailable_image.jpeg";
 
 export default class Movie extends React.Component {
   constructor(props) {
@@ -262,7 +263,6 @@ export default class Movie extends React.Component {
                       {movieVideos && movieVideos.results.length > 0 ? (
                         <div className="mt-3 iframe-container">
                           <iframe
-                            // TODO: Some movies might not have a key
                             title={movieVideos.results[0].key}
                             src={`https://www.youtube-nocookie.com/embed/${movieVideos.results[0].key}`}
                             allowFullScreen

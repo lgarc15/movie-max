@@ -1,12 +1,12 @@
 import React from "react";
 import API from "../api";
 
+import MovieSlider from "../components/MovieSlider";
+
 import { getResponseData } from "../utils/Utils";
 
 import { Container, Row, Col, Carousel } from "react-bootstrap";
 import { Animated } from "react-animated-css";
-
-import MovieSlider from "../components/MovieSlider";
 
 import "../App.css";
 import "../stylesheets/MovieSections.css";

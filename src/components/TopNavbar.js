@@ -1,12 +1,13 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
-import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
-import brandLogo from "../images/brand_logo.png";
+import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 
 import "../App.css";
 import "../stylesheets/TopNavbar.css";
+
+import brandLogo from "../images/brand_logo.png";
 
 class TopNavbar extends React.Component {
   constructor(props) {

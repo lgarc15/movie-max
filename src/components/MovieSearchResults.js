@@ -8,10 +8,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Animated } from "react-animated-css";
 
-import unavailableImage from "../images/unavailable_image.jpeg";
-
 import "../App.css";
 import "../stylesheets/MovieSearchResults.css";
+
+import unavailableImage from "../images/unavailable_image.jpeg";
 
 export default class MovieSearchResults extends React.Component {
   constructor(props) {
