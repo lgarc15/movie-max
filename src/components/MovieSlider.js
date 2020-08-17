@@ -59,7 +59,7 @@ export default class MovieSlider extends React.Component {
     return (
       <Slider {...settings} className="titles-slider">
         {this.props.movieList.results.map((value, index) => (
-          <Link key={value.id} to={`/movie/${value.id}`} onClick={this.props.onMovieClick(value.id)}>
+          <Link key={value.id} to={`/movie/${value.id}`} onClick={this.props.onMovieClick && this.props.onMovieClick(value.id)}>
             <div className="title-img-container">
               <div className="title-rating">
                 <i className="fas fa-star"></i>{" "}
