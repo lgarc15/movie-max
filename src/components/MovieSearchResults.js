@@ -47,13 +47,13 @@ export default class MovieSearchResults extends React.Component {
     const currentSearchTerm = qs.parse(this.props.location.search, {
       ignoreQueryPrefix: true,
     }).query;
+
     if (prevSearchTerm !== currentSearchTerm) {
       this.getSearchResults(currentSearchTerm);
     }
   }
 
   render() {
-    // const { searchResults, searchTerm } = this.props.history.location.state;
     const { searchResults } = this.state;
 
     return (

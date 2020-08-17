@@ -62,8 +62,6 @@ export default class Movie extends React.Component {
   }
 
   showSimilarMovie = (movieId) => (e) => {
-    // param is the argument you passed to the function
-    // e is the event object that returned
     this.getMovieInfo(movieId);
   };
 
@@ -90,9 +88,7 @@ export default class Movie extends React.Component {
       movieCredits,
       movieReviews,
     } = this.state;
-    if (movieDetails) {
-      // console.log(movieDetails.production_companies);
-    }
+
     const settings = {
       infinite: false,
       arrows: true,
@@ -147,8 +143,10 @@ export default class Movie extends React.Component {
         isVisible={true}
       >
         <Container id="movie-poster-container" fluid>
+          {/* START: MOVIE POSTER */}
           <Row>
             {movieDetails && movieDetails.backdrop_path ? (
+              // This fragment is rendered when the movie has a poster image.
               <Col>
                 <div id="movie-poster">
                   <img
@@ -194,6 +192,7 @@ export default class Movie extends React.Component {
                 </div>
               </Col>
             ) : (
+              // This fragment is rendered when the movie does not have a poster image.
               <Col
                 xs={{ span: 10, offset: 1 }}
                 sm={{ span: 10, offset: 1 }}
@@ -240,6 +239,7 @@ export default class Movie extends React.Component {
               </Col>
             )}
           </Row>
+          {/* END: MOVIE POSTER */}
         </Container>
         <Container id="movie-info-container" fluid>
           <Row id="movie-info">

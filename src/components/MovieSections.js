@@ -93,50 +93,7 @@ export default class MovieSections extends React.Component {
 
   render() {
     const { popular, nowPlaying, upcoming, trending, topRated } = this.state;
-    const settings = {
-      infinite: false,
-      arrows: true,
-      draggable: true,
-      slidesToShow: 6,
-      slidesToScroll: 6,
-      responsive: [
-        {
-          breakpoint: 1200,
-          settings: {
-            slidesToShow: 6,
-            slidesToScroll: 1,
-          },
-        },
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 5,
-            slidesToScroll: 5,
-          },
-        },
-        {
-          breakpoint: 992,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4,
-          },
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-          },
-        },
-        {
-          breakpoint: 576,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-          },
-        },
-      ],
-    };
+
     return (
       <Animated
         animationIn="fadeInRight"
@@ -146,6 +103,7 @@ export default class MovieSections extends React.Component {
         isVisible={true}
       >
         <Container fluid>
+          {/* START: MOVIE POSTER */}
           <Row>
             <Col className="carousel-container">
               <Carousel id="carousel">
@@ -175,6 +133,9 @@ export default class MovieSections extends React.Component {
               </Carousel>
             </Col>
           </Row>
+          {/* END: MOVIE POSTER */}
+
+          {/* START: NOW PLAYING MOVIES */}
           <Row
             className="justify-content-md-center movie-section"
             ref={this.nowPlayingRef}
@@ -189,6 +150,9 @@ export default class MovieSections extends React.Component {
               </Container>
             </Col>
           </Row>
+          {/* END: NOW PLAYING MOVIES */}
+
+          {/* START: UPCOMING MOVIES */}
           <Row
             className="justify-content-md-center movie-section"
             ref={this.upcomingRef}
@@ -203,6 +167,9 @@ export default class MovieSections extends React.Component {
               </Container>
             </Col>
           </Row>
+          {/* END: UPCOMING MOVIES */}
+
+          {/* START: TRENDING MOVIES */}
           <Row
             className="justify-content-md-center movie-section"
             ref={this.trendingRef}
@@ -217,6 +184,9 @@ export default class MovieSections extends React.Component {
               </Container>
             </Col>
           </Row>
+          {/* END: UPCOMING MOVIES */}
+
+          {/* START: TOP RATED MOVIES */}
           <Row
             className="justify-content-md-center movie-section"
             ref={this.topRatedRef}
@@ -231,6 +201,8 @@ export default class MovieSections extends React.Component {
               </Container>
             </Col>
           </Row>
+          {/* START: TOP RATED MOVIES */}
+          
         </Container>
       </Animated>
     );
