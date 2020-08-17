@@ -34,8 +34,7 @@ export default class Sidebar extends React.Component {
             className="sidebar-link"
             to={{
               pathname: "/",
-              hash: "#now-playing",
-              // state: { hashRef: 'now-playing' }
+              hash: "#now-playing"
             }}
           >
             <FontAwesomeIcon

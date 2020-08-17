@@ -2,14 +2,16 @@ import React from "react";
 import API from "../api";
 import qs from "qs";
 
+import { getResponseData } from "../utils/Utils";
+
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Animated } from "react-animated-css";
 
-import unavailableImage from "../images/unavailable_image.jpeg";
-
 import "../App.css";
 import "../stylesheets/MovieSearchResults.css";
+
+import unavailableImage from "../images/unavailable_image.jpeg";
 
 export default class MovieSearchResults extends React.Component {
   constructor(props) {
@@ -19,16 +21,11 @@ export default class MovieSearchResults extends React.Component {
     };
   }
 
-  // Return the data if the request was successful, otherwise `null`
-  getResponseData(response) {
-    return response.status === 200 ? response.data : null;
-  }
-
   getSearchResults(query) {
     API.get(`/search/movie?query=${query}`)
       .then((response) => {
         this.setState({
-          searchResults: this.getResponseData(response),
+          searchResults: getResponseData(response),
         });
       })
       .catch((error) => {
@@ -50,13 +47,13 @@ export default class MovieSearchResults extends React.Component {
     const currentSearchTerm = qs.parse(this.props.location.search, {
       ignoreQueryPrefix: true,
     }).query;
+
     if (prevSearchTerm !== currentSearchTerm) {
       this.getSearchResults(currentSearchTerm);
     }
   }
 
   render() {
-    // const { searchResults, searchTerm } = this.props.history.location.state;
     const { searchResults } = this.state;
 
     return (

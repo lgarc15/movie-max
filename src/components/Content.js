@@ -1,16 +1,17 @@
 import React from "react";
+
 import { Switch, Route } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 
 import MovieSections from "./MovieSections";
 import Movie from "./Movie";
 import Footer from "./Footer";
-
-import "../App.css";
-import "../stylesheets/Content.css";
 import Sidebar from "./Sidebar";
 import Cast from "./Cast";
 import MovieSearchResults from "./MovieSearchResults";
+
+import "../App.css";
+import "../stylesheets/Content.css";
 
 export default class Content extends React.Component {
   BASE_IMG_PATH = "https://image.tmdb.org/t/p/";

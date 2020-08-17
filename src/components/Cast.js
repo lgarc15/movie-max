@@ -1,16 +1,18 @@
 import React from "react";
 import API from "../api";
 
+import { getResponseData } from "../utils/Utils";
+
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Animated } from "react-animated-css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 
-import unavailableImage from "../images/unavailable_image.jpeg";
-
 import "../App.css";
 import "../stylesheets/Cast.css";
+
+import unavailableImage from "../images/unavailable_image.jpeg";
 
 export default class Cast extends React.Component {
   constructor(props) {
@@ -22,11 +24,6 @@ export default class Cast extends React.Component {
     };
   }
 
-  // Return the data if the request was successful, otherwise `null`
-  getResponse(response) {
-    return response.status === 200 ? response.data : null;
-  }
-
   getCastInfo(personId) {
     Promise.all([
       API.get(`person/${personId}`),
@@ -34,8 +31,8 @@ export default class Cast extends React.Component {
     ])
       .then(([person, personCredits]) => {
         this.setState({
-          person: this.getResponse(person),
-          personCredits: this.getResponse(personCredits),
+          person: getResponseData(person),
+          personCredits: getResponseData(personCredits),
         });
       })
       .catch(function (error) {

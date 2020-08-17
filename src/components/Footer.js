@@ -2,10 +2,10 @@ import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
 
-import theMovieDBLogo from "../images/tmdb-logo.png"
-
 import "../App.css";
 import "../stylesheets/Footer.css";
+
+import theMovieDBLogo from "../images/tmdb-logo.png"
 
 export default class Footer extends React.Component {
   render() {

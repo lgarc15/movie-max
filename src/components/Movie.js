@@ -2,16 +2,20 @@ import React from "react";
 import API from "../api";
 import Slider from "react-slick";
 
+import MovieSlider from "./MovieSlider";
+
+import { getResponseData } from "../utils/Utils";
+
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Animated } from "react-animated-css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-import unavailableImage from "../images/unavailable_image.jpeg";
-
 import "../App.css";
 import "../stylesheets/Movie.css";
+
+import unavailableImage from "../images/unavailable_image.jpeg";
 
 export default class Movie extends React.Component {
   constructor(props) {
@@ -24,11 +28,6 @@ export default class Movie extends React.Component {
       similarMovies: null,
       movieReviews: null,
     };
-  }
-
-  // Return the data if the request was successful, otherwise `null`
-  getMovieResponse(response) {
-    return response.status === 200 ? response.data : null;
   }
 
   getMovieInfo(movieId) {
@@ -48,11 +47,11 @@ export default class Movie extends React.Component {
           movieReviews,
         ]) => {
           this.setState({
-            movieDetails: this.getMovieResponse(movieDetails),
-            movieVideos: this.getMovieResponse(movieVideos),
-            similarMovies: this.getMovieResponse(similarMovies),
-            movieCredits: this.getMovieResponse(movieCredits),
-            movieReviews: this.getMovieResponse(movieReviews),
+            movieDetails: getResponseData(movieDetails),
+            movieVideos: getResponseData(movieVideos),
+            similarMovies: getResponseData(similarMovies),
+            movieCredits: getResponseData(movieCredits),
+            movieReviews: getResponseData(movieReviews),
           });
         }
       )
@@ -63,8 +62,6 @@ export default class Movie extends React.Component {
   }
 
   showSimilarMovie = (movieId) => (e) => {
-    // param is the argument you passed to the function
-    // e is the event object that returned
     this.getMovieInfo(movieId);
   };
 
@@ -91,9 +88,7 @@ export default class Movie extends React.Component {
       movieCredits,
       movieReviews,
     } = this.state;
-    if (movieDetails) {
-      // console.log(movieDetails.production_companies);
-    }
+
     const settings = {
       infinite: false,
       arrows: true,
@@ -148,8 +143,10 @@ export default class Movie extends React.Component {
         isVisible={true}
       >
         <Container id="movie-poster-container" fluid>
+          {/* START: MOVIE POSTER */}
           <Row>
             {movieDetails && movieDetails.backdrop_path ? (
+              // This fragment is rendered when the movie has a poster image.
               <Col>
                 <div id="movie-poster">
                   <img
@@ -195,6 +192,7 @@ export default class Movie extends React.Component {
                 </div>
               </Col>
             ) : (
+              // This fragment is rendered when the movie does not have a poster image.
               <Col
                 xs={{ span: 10, offset: 1 }}
                 sm={{ span: 10, offset: 1 }}
@@ -241,6 +239,7 @@ export default class Movie extends React.Component {
               </Col>
             )}
           </Row>
+          {/* END: MOVIE POSTER */}
         </Container>
         <Container id="movie-info-container" fluid>
           <Row id="movie-info">
@@ -264,7 +263,6 @@ export default class Movie extends React.Component {
                       {movieVideos && movieVideos.results.length > 0 ? (
                         <div className="mt-3 iframe-container">
                           <iframe
-                            // TODO: Some movies might not have a key
                             title={movieVideos.results[0].key}
                             src={`https://www.youtube-nocookie.com/embed/${movieVideos.results[0].key}`}
                             allowFullScreen
@@ -348,33 +346,7 @@ export default class Movie extends React.Component {
             >
               <h2 className="mb-4">Related Movies</h2>
               {similarMovies && similarMovies.results.length > 0 ? (
-                <Slider {...settings} className="titles-slider">
-                  {similarMovies.results.map((value, index) => (
-                    <Link
-                      key={value.id}
-                      to={`/movie/${value.id}`}
-                      onClick={this.showSimilarMovie(value.id)}
-                    >
-                      <div className="title-img-container">
-                        <div className="title-rating">
-                          <i className="fas fa-star"></i>{" "}
-                          <span>{value.vote_average}</span>
-                        </div>
-                        <img
-                          src={
-                            value.poster_path
-                              ? `${this.props.baseImgPath}w342${value.poster_path}`
-                              : unavailableImage
-                          }
-                          alt=""
-                        />
-                      </div>
-                      <p className="title-name text-truncate">
-                        {value.original_title}
-                      </p>
-                    </Link>
-                  ))}
-                </Slider>
+                <MovieSlider movieList={similarMovies} baseImgPath={this.props.baseImgPath} onMovieClick={this.showSimilarMovie} />
               ) : (
                 <h5 className="mt-4">No movies found, we're sorry :/</h5>
               )}
