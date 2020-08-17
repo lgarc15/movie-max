@@ -2,6 +2,8 @@ import React from "react";
 import API from "../api";
 import Slider from "react-slick";
 
+import { getResponseData } from "../utils/Utils";
+
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Animated } from "react-animated-css";
@@ -27,11 +29,6 @@ export default class Movie extends React.Component {
     };
   }
 
-  // Return the data if the request was successful, otherwise `null`
-  getMovieResponse(response) {
-    return response.status === 200 ? response.data : null;
-  }
-
   getMovieInfo(movieId) {
     Promise.all([
       API.get(`movie/${movieId}`),
@@ -49,11 +46,11 @@ export default class Movie extends React.Component {
           movieReviews,
         ]) => {
           this.setState({
-            movieDetails: this.getMovieResponse(movieDetails),
-            movieVideos: this.getMovieResponse(movieVideos),
-            similarMovies: this.getMovieResponse(similarMovies),
-            movieCredits: this.getMovieResponse(movieCredits),
-            movieReviews: this.getMovieResponse(movieReviews),
+            movieDetails: getResponseData(movieDetails),
+            movieVideos: getResponseData(movieVideos),
+            similarMovies: getResponseData(similarMovies),
+            movieCredits: getResponseData(movieCredits),
+            movieReviews: getResponseData(movieReviews),
           });
         }
       )

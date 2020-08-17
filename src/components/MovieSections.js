@@ -1,18 +1,15 @@
 import React from "react";
-
 import API from "../api";
-import Slider from "react-slick";
+
+import { getResponseData } from "../utils/Utils";
 
 import { Container, Row, Col, Carousel } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { Animated } from "react-animated-css";
 
 import MovieSlider from "../components/MovieSlider";
 
 import "../App.css";
 import "../stylesheets/MovieSections.css";
-
-import unavailableImage from "../images/unavailable_image.jpeg";
 
 export default class MovieSections extends React.Component {
   constructor(props) {
@@ -30,11 +27,6 @@ export default class MovieSections extends React.Component {
       trending: null,
       topRated: null,
     };
-  }
-
-  //Return the data if the request was successful, otherwise `null`
-  getMovieResponse(response) {
-    return response.status === 200 ? response.data : null;
   }
 
   jumpToHash = () => {
@@ -86,11 +78,11 @@ export default class MovieSections extends React.Component {
     ])
       .then(([popular, nowPlaying, upcoming, trending, topRated]) => {
         this.setState({
-          popular: this.getMovieResponse(popular),
-          nowPlaying: this.getMovieResponse(nowPlaying),
-          upcoming: this.getMovieResponse(upcoming),
-          trending: this.getMovieResponse(trending),
-          topRated: this.getMovieResponse(topRated),
+          popular: getResponseData(popular),
+          nowPlaying: getResponseData(nowPlaying),
+          upcoming: getResponseData(upcoming),
+          trending: getResponseData(trending),
+          topRated: getResponseData(topRated),
         });
       })
       .catch(function (error) {

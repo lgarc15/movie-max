@@ -2,6 +2,8 @@ import React from "react";
 import API from "../api";
 import qs from "qs";
 
+import { getResponseData } from "../utils/Utils";
+
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Animated } from "react-animated-css";
@@ -19,16 +21,11 @@ export default class MovieSearchResults extends React.Component {
     };
   }
 
-  // Return the data if the request was successful, otherwise `null`
-  getResponseData(response) {
-    return response.status === 200 ? response.data : null;
-  }
-
   getSearchResults(query) {
     API.get(`/search/movie?query=${query}`)
       .then((response) => {
         this.setState({
-          searchResults: this.getResponseData(response),
+          searchResults: getResponseData(response),
         });
       })
       .catch((error) => {
