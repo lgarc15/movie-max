@@ -5,8 +5,6 @@ import qs from "qs";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Animated } from "react-animated-css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 
 import unavailableImage from "../images/unavailable_image.jpeg";
 

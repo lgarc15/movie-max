@@ -12,7 +12,6 @@ import unavailableImage from "../images/unavailable_image.jpeg";
 
 import "../App.css";
 import "../stylesheets/Movie.css";
-import "../stylesheets/Content.css";
 
 export default class Movie extends React.Component {
   constructor(props) {
