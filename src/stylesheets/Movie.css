@@ -39,22 +39,6 @@
     font-size: 1.2em;
 }
 
-/* #movie-info-container {
-    display: flex;
-    justify-content: center;
-    border: 1px solid red;
-} */
-
-#movie-info {
-    /* width: 80%; */
-    /* border: 1px solid orange; */
-}
-
-/* #movie-info > div {
-    border: 1px solid blue;
-    padding: 0;
-} */
-
 #movie-status {
     font-size: 1.4em;
     font-weight: 400;

@@ -1,0 +1,90 @@
+.carousel-meta {
+    text-align: left;
+}
+
+.carousel-meta-name {
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.about-movie-btn {
+    border-radius: 40px;
+    font-size: 1.2em;
+    padding: 8px 24px;
+    border: none;
+    color: rgb(255, 255, 255);
+}
+
+.movie-section {
+    padding-top: 90px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media(max-width: 575.98px) {
+    .carousel-indicators {
+        visibility: hidden;
+    }
+
+    .carousel-meta {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .carousel-meta-name {
+        text-align: center;
+        font-size: 1.4em;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media(min-width: 576px) {
+
+    .carousel-indicators {
+        visibility: hidden;
+    }
+
+    .carousel-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .carousel-meta-name {
+        font-size: 1.6em;
+        text-align: center;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media(min-width: 768px) {
+
+    .carousel-indicators {
+        visibility: visible;
+    }
+
+    .carousel-meta {
+        display: block;
+    }
+
+    .carousel-meta-name {
+        font-size: 1.6em;
+        text-align: left;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media(min-width: 992px) {}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media(min-width: 1200px) {
+    .carousel-img {
+        height: 80vh;
+    }
+}

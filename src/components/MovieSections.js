@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import { Animated } from "react-animated-css";
 
 import "../App.css";
-import "../stylesheets/Movie.css";
 import "../stylesheets/MovieSections.css";
 
 import unavailableImage from "../images/unavailable_image.jpeg";

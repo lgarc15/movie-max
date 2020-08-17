@@ -1,6 +1,3 @@
-#cast-member-container {
-}
-
 #cast-member-container > div {
     margin: 0;
 }
@@ -17,11 +14,6 @@
     font-size: 1.2em;
     font-weight: 400;
     color: rgb(108, 117, 125);
-    /* border: 1px solid green; */
-}
-
-#cast-birthplace-logo {
-    /* border: 1px solid red; */
 }
 
 #cast-birthplace {
