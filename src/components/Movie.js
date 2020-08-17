@@ -12,6 +12,7 @@ import unavailableImage from "../images/unavailable_image.jpeg";
 
 import "../App.css";
 import "../stylesheets/Movie.css";
+import MovieSlider from "./MovieSlider";
 
 export default class Movie extends React.Component {
   constructor(props) {
@@ -348,33 +349,7 @@ export default class Movie extends React.Component {
             >
               <h2 className="mb-4">Related Movies</h2>
               {similarMovies && similarMovies.results.length > 0 ? (
-                <Slider {...settings} className="titles-slider">
-                  {similarMovies.results.map((value, index) => (
-                    <Link
-                      key={value.id}
-                      to={`/movie/${value.id}`}
-                      onClick={this.showSimilarMovie(value.id)}
-                    >
-                      <div className="title-img-container">
-                        <div className="title-rating">
-                          <i className="fas fa-star"></i>{" "}
-                          <span>{value.vote_average}</span>
-                        </div>
-                        <img
-                          src={
-                            value.poster_path
-                              ? `${this.props.baseImgPath}w342${value.poster_path}`
-                              : unavailableImage
-                          }
-                          alt=""
-                        />
-                      </div>
-                      <p className="title-name text-truncate">
-                        {value.original_title}
-                      </p>
-                    </Link>
-                  ))}
-                </Slider>
+                <MovieSlider movieList={similarMovies} baseImgPath={this.props.baseImgPath} onMovieClick={this.showSimilarMovie} />
               ) : (
                 <h5 className="mt-4">No movies found, we're sorry :/</h5>
               )}

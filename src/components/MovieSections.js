@@ -7,6 +7,8 @@ import { Container, Row, Col, Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Animated } from "react-animated-css";
 
+import MovieSlider from "../components/MovieSlider";
+
 import "../App.css";
 import "../stylesheets/MovieSections.css";
 
@@ -190,29 +192,7 @@ export default class MovieSections extends React.Component {
               <Container className="titles">
                 <h2>Now Playing</h2>
                 {nowPlaying !== null && (
-                  <Slider {...settings} className="titles-slider">
-                    {nowPlaying.results.map((value, index) => (
-                      <Link key={value.id} to={`/movie/${value.id}`}>
-                        <div className="title-img-container">
-                          <div className="title-rating">
-                            <i className="fas fa-star"></i>{" "}
-                            <span>{value.vote_average}</span>
-                          </div>
-                          <img
-                            src={
-                              value.poster_path
-                                ? `${this.props.baseImgPath}w342${value.poster_path}`
-                                : unavailableImage
-                            }
-                            alt=""
-                          />
-                        </div>
-                        <p className="title-name text-truncate">
-                          {value.original_title}
-                        </p>
-                      </Link>
-                    ))}
-                  </Slider>
+                  <MovieSlider movieList={nowPlaying} baseImgPath={this.props.baseImgPath} />
                 )}
               </Container>
             </Col>
@@ -226,29 +206,7 @@ export default class MovieSections extends React.Component {
               <Container className="titles">
                 <h2>Upcoming</h2>
                 {upcoming !== null && (
-                  <Slider {...settings} className="titles-slider">
-                    {upcoming.results.map((value, index) => (
-                      <Link key={value.id} to={`/movie/${value.id}`}>
-                        <div className="title-img-container">
-                          <div className="title-rating">
-                            <i className="fas fa-star"></i>{" "}
-                            <span>{value.vote_average}</span>
-                          </div>
-                          <img
-                            src={
-                              value.poster_path
-                                ? `${this.props.baseImgPath}w342${value.poster_path}`
-                                : unavailableImage
-                            }
-                            alt=""
-                          />
-                        </div>
-                        <p className="title-name text-truncate">
-                          {value.original_title}
-                        </p>
-                      </Link>
-                    ))}
-                  </Slider>
+                  <MovieSlider movieList={upcoming} baseImgPath={this.props.baseImgPath} />
                 )}
               </Container>
             </Col>
@@ -262,29 +220,7 @@ export default class MovieSections extends React.Component {
               <Container className="titles">
                 <h2>Trending</h2>
                 {trending !== null && (
-                  <Slider {...settings} className="titles-slider">
-                    {trending.results.map((value, index) => (
-                      <Link key={value.id} to={`/movie/${value.id}`}>
-                        <div className="title-img-container">
-                          <div className="title-rating">
-                            <i className="fas fa-star"></i>{" "}
-                            <span>{value.vote_average}</span>
-                          </div>
-                          <img
-                            src={
-                              value.poster_path
-                                ? `${this.props.baseImgPath}w342${value.poster_path}`
-                                : unavailableImage
-                            }
-                            alt=""
-                          />
-                        </div>
-                        <p className="title-name text-truncate">
-                          {value.original_title}
-                        </p>
-                      </Link>
-                    ))}
-                  </Slider>
+                  <MovieSlider movieList={trending} baseImgPath={this.props.baseImgPath} />
                 )}
               </Container>
             </Col>
@@ -298,29 +234,7 @@ export default class MovieSections extends React.Component {
               <Container className="titles">
                 <h2>Top Rated</h2>
                 {topRated !== null && (
-                  <Slider {...settings} className="titles-slider">
-                    {topRated.results.map((value, index) => (
-                      <Link key={value.id} to={`/movie/${value.id}`}>
-                        <div className="title-img-container">
-                          <div className="title-rating">
-                            <i className="fas fa-star"></i>{" "}
-                            <span>{value.vote_average}</span>
-                          </div>
-                          <img
-                            src={
-                              value.poster_path
-                                ? `${this.props.baseImgPath}w342${value.poster_path}`
-                                : unavailableImage
-                            }
-                            alt=""
-                          />
-                        </div>
-                        <p className="title-name text-truncate">
-                          {value.original_title}
-                        </p>
-                      </Link>
-                    ))}
-                  </Slider>
+                  <MovieSlider movieList={topRated} baseImgPath={this.props.baseImgPath} />
                 )}
               </Container>
             </Col>
