@@ -19,7 +19,7 @@
     padding: 0;
 }
 
-/* START: USED BY MovieSections.js and Movie.js */
+/* START: USED BY MovieSlider.js and Movie.js */
 button.slick-prev.slick-arrow::before,
 button.slick-next.slick-arrow::before {
   font-size: 35px;
