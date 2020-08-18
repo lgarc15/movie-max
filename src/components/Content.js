@@ -64,6 +64,11 @@ export default class Content extends React.Component {
                   <MovieSearchResults {...props} baseImgPath={this.BASE_IMG_PATH} />
                 )}
               />
+              <Route>
+                <h1 className="my-cl-tertiary mt-5 text-center" style={{
+                  fontWeight: 700
+                }}>404 - Not Found</h1>
+              </Route>
             </Switch>
 
             {/* ----- FOOTER ----- */}
