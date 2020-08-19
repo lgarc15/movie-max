@@ -7,6 +7,7 @@ import { getResponseData } from "../utils/Utils";
 
 import { Container, Row, Col, Carousel } from "react-bootstrap";
 import { Animated } from "react-animated-css";
+import { Link } from "react-router-dom";
 
 import "../App.css";
 import "../stylesheets/MovieSections.css";
@@ -118,12 +119,15 @@ export default class MovieSections extends React.Component {
                         />
                         <Carousel.Caption>
                           <div className="carousel-meta">
-                            <h1 className="carousel-meta-name">
+                            <h1 className="carousel-meta-name mb-3">
                               {value.title}
                             </h1>
-                            <button className="about-movie-btn my-bg-tertiary">
+                            <Link
+                              to={`/movie/${value.id}`}
+                              className="about-movie-btn my-bg-tertiary"
+                            >
                               About Movie
-                            </button>
+                            </Link>
                           </div>
                           {/* <p>This is some text that must be here.</p> */}
                         </Carousel.Caption>
@@ -145,7 +149,10 @@ export default class MovieSections extends React.Component {
               <Container className="titles">
                 <h2>Now Playing</h2>
                 {nowPlaying !== null && (
-                  <MovieSlider movieList={nowPlaying} baseImgPath={this.props.baseImgPath} />
+                  <MovieSlider
+                    movieList={nowPlaying}
+                    baseImgPath={this.props.baseImgPath}
+                  />
                 )}
               </Container>
             </Col>
@@ -162,7 +169,10 @@ export default class MovieSections extends React.Component {
               <Container className="titles">
                 <h2>Upcoming</h2>
                 {upcoming !== null && (
-                  <MovieSlider movieList={upcoming} baseImgPath={this.props.baseImgPath} />
+                  <MovieSlider
+                    movieList={upcoming}
+                    baseImgPath={this.props.baseImgPath}
+                  />
                 )}
               </Container>
             </Col>
@@ -179,7 +189,10 @@ export default class MovieSections extends React.Component {
               <Container className="titles">
                 <h2>Trending</h2>
                 {trending !== null && (
-                  <MovieSlider movieList={trending} baseImgPath={this.props.baseImgPath} />
+                  <MovieSlider
+                    movieList={trending}
+                    baseImgPath={this.props.baseImgPath}
+                  />
                 )}
               </Container>
             </Col>
@@ -196,13 +209,15 @@ export default class MovieSections extends React.Component {
               <Container className="titles">
                 <h2>Top Rated</h2>
                 {topRated !== null && (
-                  <MovieSlider movieList={topRated} baseImgPath={this.props.baseImgPath} />
+                  <MovieSlider
+                    movieList={topRated}
+                    baseImgPath={this.props.baseImgPath}
+                  />
                 )}
               </Container>
             </Col>
           </Row>
           {/* START: TOP RATED MOVIES */}
-          
         </Container>
       </Animated>
     );

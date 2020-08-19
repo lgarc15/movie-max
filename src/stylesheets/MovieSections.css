@@ -8,11 +8,16 @@
 }
 
 .about-movie-btn {
-    border-radius: 40px;
-    font-size: 1.2em;
+    border-radius: 35px;
+    font-size: 1.4em;
     padding: 8px 24px;
     border: none;
+    text-decoration: none !important;
     color: rgb(255, 255, 255);
+}
+
+.about-movie-btn:hover {
+    color: inherit;
 }
 
 .movie-section {
