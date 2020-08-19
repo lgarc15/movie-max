@@ -14,7 +14,19 @@ class TopNavbar extends React.Component {
     super(props);
     this.state = {
       searchTerm: "",
+      expanded: false
     };
+  }
+
+  getExpandedStateAfterClick() {
+    const { expanded } = this.state;
+    return expanded ? false : "expanded";
+  }
+
+  setExpanded = () => {
+    this.setState({
+      expanded: this.getExpandedStateAfterClick()
+    });
   }
 
   handleInputChange = (e) => {
@@ -23,11 +35,10 @@ class TopNavbar extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
+    
     const { searchTerm } = this.state;
-    this.setState({ searchTerm: "" });
-
     if (searchTerm.length > 0) {
+      this.setState({ searchTerm: "", expanded: this.getExpandedStateAfterClick() });
       this.props.history.push({
         pathname: "/movies",
         search: `?query=${searchTerm}`
@@ -36,8 +47,9 @@ class TopNavbar extends React.Component {
   };
 
   render() {
+    const { expanded } = this.state;
     return (
-      <Navbar expand="sm" fixed="top" id="top-navbar">
+      <Navbar expand="sm" fixed="top" id="top-navbar" expanded={expanded}>
         <Navbar.Brand className="my-cl-tertiary" id="top-navbar-brand">
           <Link
             to={{
@@ -54,7 +66,7 @@ class TopNavbar extends React.Component {
             MovieMax
           </Link>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="top-navbar-content" />
+        <Navbar.Toggle aria-controls="top-navbar-content" onClick={() => this.setExpanded()} />
         <Navbar.Collapse id="top-navbar-content">
           <Nav className="mr-auto" />
           <Nav id="top-navbar-search-form-container">

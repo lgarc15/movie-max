@@ -6,10 +6,6 @@ import { Link } from "react-router-dom";
 import unavailableImage from "../images/unavailable_image.jpeg";
 
 export default class MovieSlider extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const settings = {
       infinite: false,
