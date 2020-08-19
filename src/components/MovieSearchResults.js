@@ -18,6 +18,9 @@ export default class MovieSearchResults extends React.Component {
     super(props);
     this.state = {
       searchResults: null,
+      searchQuery: qs.parse(this.props.location.search, {
+        ignoreQueryPrefix: true,
+      }).query,
     };
   }
 
@@ -26,6 +29,7 @@ export default class MovieSearchResults extends React.Component {
       .then((response) => {
         this.setState({
           searchResults: getResponseData(response),
+          searchQuery: query,
         });
       })
       .catch((error) => {
@@ -34,10 +38,7 @@ export default class MovieSearchResults extends React.Component {
   }
 
   componentDidMount() {
-    const searchTerm = qs.parse(this.props.location.search, {
-      ignoreQueryPrefix: true,
-    }).query;
-    this.getSearchResults(searchTerm);
+    this.getSearchResults(this.state.searchQuery);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -54,7 +55,7 @@ export default class MovieSearchResults extends React.Component {
   }
 
   render() {
-    const { searchResults } = this.state;
+    const { searchResults, searchQuery } = this.state;
 
     return (
       <Animated
@@ -67,14 +68,22 @@ export default class MovieSearchResults extends React.Component {
         <Container id="search-results-container" fluid>
           <Row>
             <Col xs={12} sm={12} md={12} lg={12} xl={12}>
-              <h2>Search</h2>
+              <h2 className="mt-4">Search</h2>
               <p>
-                Showing {searchResults && searchResults.results.length} results
+                Showing {searchResults ? searchResults.results.length : 0}{" "}
+                results for {searchQuery ? `"${searchQuery}"` : ""}
               </p>
             </Col>
             {searchResults &&
               searchResults.results.map((value, index) => (
-                <Col xs={6} sm={4} md={3} lg={2} className="mt-4 mb-4" key={index}>
+                <Col
+                  xs={6}
+                  sm={4}
+                  md={3}
+                  lg={2}
+                  className="mt-4 mb-4"
+                  key={index}
+                >
                   <Link
                     key={value.id}
                     to={`/movie/${value.id}`}

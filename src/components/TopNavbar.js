@@ -37,7 +37,7 @@ class TopNavbar extends React.Component {
 
   render() {
     return (
-      <Navbar expand="lg" fixed="top" id="top-navbar">
+      <Navbar expand="sm" fixed="top" id="top-navbar">
         <Navbar.Brand className="my-cl-tertiary" id="top-navbar-brand">
           <Link
             to={{
