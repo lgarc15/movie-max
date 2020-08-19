@@ -33,11 +33,18 @@ class TopNavbar extends React.Component {
     this.setState({ searchTerm: e.target.value });
   };
 
+  handleKeyPress = (e) => {
+    if(e.keyCode === 13) {
+      this.handleSubmit(e);
+    }
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     
     const { searchTerm } = this.state;
     if (searchTerm.length > 0) {
+      console.log('searchTerm: ' + searchTerm);
       this.setState({ searchTerm: "", expanded: this.getExpandedStateAfterClick() });
       this.props.history.push({
         pathname: "/movies",
@@ -78,6 +85,7 @@ class TopNavbar extends React.Component {
                 id="top-navbar-search-input"
                 value={this.state.searchTerm}
                 onChange={this.handleInputChange}
+                onKeyDown={this.handleKeyPress}
               />
               <Button
                 className="my-bg-tertiary"
