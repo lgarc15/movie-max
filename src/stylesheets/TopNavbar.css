@@ -19,19 +19,28 @@
 
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
+    #top-navbar {
+        /* border: 1px solid red; */
+    }
+    #top-navbar-brand a {
+        font-size: 0.9em;
+        /* border: 1px solid blue; */
+    }
     #top-navbar-search-form-container {
         padding-top: 30px;
         padding-bottom: 15px;
+        /* border: 1px solid green; */
     }
     #top-navbar-search-form {
         display: flex;
         justify-content: space-between;
     }
     #top-navbar-search-input {
-        flex-basis: 78%;
+        flex-basis: 70%;
+        margin-right: 0 !important;
     }
     #top-navbar-search-btn {
-        flex-basis: 20%;
+        flex-basis: 28%;
     }
 }
 
