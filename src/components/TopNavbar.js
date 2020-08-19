@@ -44,7 +44,6 @@ class TopNavbar extends React.Component {
     
     const { searchTerm } = this.state;
     if (searchTerm.length > 0) {
-      console.log('searchTerm: ' + searchTerm);
       this.setState({ searchTerm: "", expanded: this.getExpandedStateAfterClick() });
       this.props.history.push({
         pathname: "/movies",
