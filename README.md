@@ -8,7 +8,7 @@
         Browse your favorite movies, actors, and watch trailers. See what is playing in theaters right now. Discover upcoming, trending, and top-rated titles.
         <br />
         <br />
-        <a href="movie-max.lgarcia.us">View Demo</a>
+        <a href="https://movie-max.lgarcia.us">View Demo</a>
         ·
         <a href="https://github.com/luisg5/movie-max/issues">Report Bug</a>
         ·
